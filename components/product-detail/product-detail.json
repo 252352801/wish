@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "currency": "/components/currency/currency",
+    "percent": "/components/percent/percent",
+    "datetime":"/components/datetime/datetime"
+  }
+}

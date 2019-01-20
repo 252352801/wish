@@ -1,0 +1,58 @@
+<!--pages/wish/wish.wxml-->
+<view class='page-wish'>
+  <view class='wish-banner'>
+    <view class='wish-banner-body'>
+      <image src='/assets/img/wish/banner.png'></image>
+    </view>
+  </view>
+  <view class='wish-title-select'>
+    <picker bindchange="bindPickerChange" value="{{index}}" range="{{titleOptions}}">
+      <view class="picker">{{titleOptions[index]}}</view>
+      <view class="wish-title-arrow"></view>
+    </picker>
+  </view>
+  <view class="form">
+    <view class="form-item">
+      <view class='form-item-body'>
+        <label>我的愿望</label>
+        <view class="form-item-content">
+          <textarea auto-height placeholder="我的愿望" />
+        </view>
+      </view>
+    </view>
+    <view class="form-item mar-b">
+      <view class='form-item-body'>
+        <label>愿望提醒时间</label>
+        <view class="form-item-content">
+          <picker mode="date" value="{{datetime}}" start="2015-09-01" end="2017-09-01" bindchange="bindDatetimeChange">
+            <text class="">{{datetime}}</text>
+          </picker>
+        </view>
+      </view>
+    </view>
+    <view class="form-item">
+      <view class='form-item-body' style='padding-top:12px;'>
+        <label>贴在愿望墙</label>
+        <view class="form-item-content text-right">
+          <switch checked bindchange="togglePase" />
+        </view>
+      </view>
+      <view class='form-item-tips'>其他用户可以在愿望墙上看到你的愿望</view>
+    </view>
+    <view class="form-item">
+      <view class='form-item-body' style='padding-top:12px;'>
+        <label>支持红包祝福</label>
+        <view class="form-item-content text-right">
+          <switch checked bindchange="toggleCoupon" />
+        </view>
+      </view>
+      <view class='form-item-tips'>1.允许发红包的方式祝福，仅限安卓用户</view>
+      <view class='form-item-tips'>2.红包可体现到微信，收取2%的手续费</view>
+    </view>
+
+    <view class='wish-btn-bar'>
+      <button type="primary">许下愿望</button>
+    </view>
+
+  </view>
+</view>

@@ -1,0 +1,79 @@
+/* pages/home/home.wxss */
+
+/*适配各屏幕刚好显示一屏不出现滚动条*/
+
+page {
+  background-color: #fff;
+}
+
+.page-home {
+  position: relative;
+}
+
+.home-banner {
+  padding-top: 37.33%;
+  position: relative;
+}
+
+.home-banner-body {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: #ea5958;
+}
+
+.home-banner-body image {
+  width: 100%;
+  height: 100%;
+}
+.home-tab{
+  display: flex;
+  max-width: 50%;
+  margin: 15px auto;
+  border:1px solid #ea5958;
+  border-radius: 100px;
+  overflow: hidden;
+}
+.home-tab-item{
+  font-size: 14px;
+  color:rgb(102,102,102);
+  text-align: center;
+  flex-grow: 1;
+  padding: 8px 14px;
+}
+.home-tab-item.active{
+  background-color: #ea5958;
+  color:#fff;
+}
+.home-list{
+  display: flex;
+  padding: 8px 12px;
+  border-bottom: 1px solid #dcdcdc;
+  font-size: 13px;
+  align-items: center;
+   color:rgb(153,153,153);
+}
+.home-list-index{
+  flex-grow: 2;
+  font-size: 18px;
+}
+.home-lista-avatar{
+  flex-grow: 4;
+}
+.home-list-nickname{
+  flex-grow: 16;
+  padding: 0 12px;
+  color:rgb(51,51,51);
+}
+.home-list-moments{
+  flex-grow: 4;
+  text-align: right;
+  font-size: 12px;
+}
+.home-list-avatar image{
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}

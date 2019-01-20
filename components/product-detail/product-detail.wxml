@@ -1,0 +1,91 @@
+<!--components/product-detail/product-detail.wxml-->
+<view class='wrap' wx:if='{{product.productId&&product.productName}}'>
+  <view class='top clearfix'>
+    <view class='pull-left' style='width:500rpx'>
+      <view>
+        <text class='product-name'>{{product.productName}}</text>
+      </view>
+    </view>
+    <view class='pull-right clr-disabled' style='width:190rpx'>
+      <view hover-class='clr-default' class='text-right'>
+        <navigator url='/pages/finance/debitors/debitors' hover-class='none'>
+          <text>债权信息 〉</text>
+        </navigator>
+      </view>
+    </view>
+  </view>
+  <view class="flex text-center pad-t-xs">
+    <view class="flex-item">
+      <view class='clr-primary'>
+        <percent class='text-xxl' value='{{product.interestRate}}' unit=''></percent>
+        <text>%</text>
+      </view>
+      <view style='margin-top:-4rpx;'>
+        <text class='clr-disabled'>年化收益</text>
+      </view>
+    </view>
+    <view class="flex-item">
+      <view>
+        <text class='text-lg'>{{product.productPeriod||'未知'}}</text>
+      </view>
+      <view>
+        <text class='clr-disabled'>期限</text>
+      </view>
+    </view>
+    <view class="flex-item">
+      <view>
+        <currency class='text-lg' value='{{product.buy?product.surplusAmount:0}}' divisor='10000' unit='万元'>
+        </currency>
+      </view>
+      <view>
+        <text class='clr-disabled'>剩余可投</text>
+      </view>
+    </view>
+  </view>
+  <view class='pad-t-sm'>
+    <view class='ifmp-steps'>
+      <view class='ifmp-step' style='width:33%;'>
+        <view class='ifmp-step-date'>
+          <datetime value='{{realSubscriptionTime}}'></datetime>
+        </view>
+        <view class='ifmp-step-date-label'>认购</view>
+        <view class='ifmp-step-label'>
+          <view wx:if='{{product.interestDelay||product.interestDelay===0}}'>
+            {{product.interestDelayType}}+{{product.interestDelay}}起息
+          </view>
+        </view>
+      </view>
+      <view class='ifmp-step' style='width:33%;'>
+        <view class='ifmp-step-date'>
+          <datetime value='{{realInterestBeginTime}}'></datetime>
+        </view>
+        <view class='ifmp-step-date-label'>起息</view>
+        <view class='ifmp-step-label' style='text-align:right;text-indent:3em;white-space:nowrap'>
+          锁定期{{lockedTime}}
+        </view>
+      </view>
+      <view class='ifmp-step ifmp-step-end' style='width:30%;'>
+        <view class='ifmp-step-date'>
+          <datetime value='{{product.interestEnd}}'></datetime>
+        </view>
+        <view class='clearfix'>
+          <view class='ifmp-step-date-label pull-right'>到期</view>
+        </view>
+        <view class='ifmp-step-label'>
+
+        </view>
+      </view>
+      <!--<view class='ifmp-step ifmp-step-end' style='width:25%;'>
+        <view class='ifmp-step-date'>{{product.quitDate}}</view>
+        <view class='clearfix'>
+          <view class='ifmp-step-date-label pull-right'>退出日</view>
+        </view>
+
+        <view class='ifmp-step-label'>
+
+        </view>
+      </view>-->
+    </view>
+    <view class='tips-sold-out' wx:if='{{!product.buy}}'>已售罄</view>
+  </view>
+</view>

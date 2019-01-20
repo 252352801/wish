@@ -1,0 +1,41 @@
+{
+  "pages": [
+    "pages/wish/wish",
+    "pages/user/user",  
+    "pages/home/home",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundColor": "#D7625D",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#D7625D",
+    "navigationBarTitleText": "我的小心愿",
+    "navigationBarTextStyle": "#fff"
+  },
+  "tabBar": {
+    "color": "#a9a9a9",
+    "selectedColor": "#D7625D",
+    "backgroundColor": "#fefefe",
+    "position": "bottom",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "榜单",
+        "iconPath": "assets/img/tabbar/tab_home.png",
+        "selectedIconPath": "assets/img/tabbar/tab_home_act.png"
+      },
+      {
+        "pagePath": "pages/wish/wish",
+        "text": "我要许愿",
+        "iconPath": "assets/img/tabbar/tab_wish.png",
+        "selectedIconPath": "assets/img/tabbar/tab_wish_act.png"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "我的",
+        "iconPath": "assets/img/tabbar/tab_mine.png",
+        "selectedIconPath": "assets/img/tabbar/tab_mine_act.png"
+      }
+    ]
+  }
+}

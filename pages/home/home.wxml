@@ -1,0 +1,23 @@
+<!--pages/home/home.wxml-->
+<view class='page-home'>
+  <view class='home-banner'>
+    <view class='home-banner-body'>
+      <image src='/assets/img/background/home_banner.png'></image>
+    </view>
+  </view>
+  <view class='home-tab'>
+    <view class='home-tab-item active'>获得祝福</view>
+    <view class='home-tab-item'>获得红包</view>
+  </view>
+  <view class='home-list' wx:for="{{list}}">
+    <view class='home-list-index'>{{index+1}}</view>
+    <view class='home-list-avatar'>
+      <image src="{{item.avatar}}"></image>
+    </view>
+    <view class='home-list-nickname'>{{item.nickname}}</view>
+    <view class='home-list-moments'>
+      <view class='icon-heart'></view>
+      <view>{{item.moments}}</view>
+    </view>
+  </view>
+</view>

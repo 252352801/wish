@@ -1,0 +1,2 @@
+<!--components/percent/percent.wxml-->
+<block>{{formattedValue}}</block>

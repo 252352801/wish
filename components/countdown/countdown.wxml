@@ -1,0 +1,4 @@
+<!--components/countdown/countdown.wxml-->
+<view bindtap='run'>
+  {{value}}
+</view>

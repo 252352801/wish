@@ -1,0 +1,2 @@
+<!--components/currency/currency.wxml-->
+<block>{{formattedValue}}</block>

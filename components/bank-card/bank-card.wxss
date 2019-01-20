@@ -1,0 +1,90 @@
+/* components/bank-card/bank-card.wxss */
+.clr-disabled{
+  color:#848484;
+}
+.bank-card{
+  margin: 30rpx;
+  box-shadow: 10px 10px 10px #ccc;
+  background-color: #fff;
+  font-size: 14px;
+  border-radius:6px;
+}
+.bank-card-header{
+  padding: 20rpx 30rpx;
+  display: flex;
+  align-items: center;
+}
+.bank-card-logo,.bank-card-name,.bank-card-tag{
+  float: left;
+}
+.bank-card-logo{
+  flex-grow:1;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+.bank-card-name{
+  flex-grow: 1;
+  width:360rpx;
+  font-size: 18px;
+  font-family: sans-serif;
+  font-weight: bold;
+  color: #666;
+  padding-left: 5px;
+}
+.bank-card-tag{
+  flex-grow: 1;
+  display: block;
+  height: 24px;
+  background-color: #ff6600;
+  color: #fff;
+  padding: 0px 8px;
+  font-size: 13px;
+  position: relative;
+  float: right;
+  line-height: 24px;
+}
+.bank-card-tag::after{
+  content: '';
+  width: 0;
+  height: 0;
+  display: block;
+  border:12px solid transparent;
+  border-right:8px solid #ff6600;
+  position: absolute;
+  top:0;
+  left: -20px;
+}
+.bank-card-body{
+  padding:20rpx 30rpx 20rpx 60rpx;
+  min-height: 52rpx;
+  display: flex;
+  align-items: center;
+  background-color: rgb(255, 102, 0);
+}
+.bank-card-num{
+  font-size: 18px;
+  color:#fff;
+}
+.bank-card-footer{
+  padding: 40rpx 30rpx 40rpx 60rpx;
+}
+.bank-card-logo image{
+  width:48rpx;
+  height:48rpx;
+}
+button{
+  color:#169BD5;
+}
+.hide.bank-card .bank-card-header{
+  opacity: 0;
+}
+.hide.bank-card .bank-card-body button{
+  display: none;
+}
+.hide.bank-card .bank-card-body text{
+  display: none;
+}
+.hide.bank-card .bank-card-footer{
+  opacity: 0;
+}
