@@ -1,0 +1,45 @@
+<!--pages/wishdetails/wishdetails.wxml-->
+<view class='wd-banner'>
+  <view class='wd-banner-body'>
+    <image src='/assets/img/wish/banner.png'></image>
+  </view>
+</view>
+<view class='wd-avatar-wrapper'>
+  <view class='wd-avatar-body'>
+    <image src='/assets/img/avatar/avatar2.png'></image>
+  </view>
+</view>
+<view class='wd-nickname text-center'>下次我请</view>
+<view class='wd-content text-center'>
+  <view class='wd-title'>我的2019愿望</view>
+  <view class='wd-time'>愿望提醒时间：2019-10-07 00:00:00</view>
+  <view class='wd-description'>我要脱单脱单脱单脱单脱单，不要再做狗了，不要了不要了不要了不要了不要了不要了不要了不要了不要了不要了不要了不要了不要了不要了不要了</view>
+  <view class='wd-btn-collapse'>展开</view>
+</view>
+<view class='wd-benediction-title text-center'>好友祝福</view>
+<view class='wd-benediction-value text-center'>已有
+  <text>0</text> 个好友祝福 收到
+  <text>0</text> 个红包
+</view>
+<view class="wd-benediction-item">
+  <view class='wd-benediction-avatar'>
+    <image src='/assets/img/avatar/avatar2.png'></image>
+  </view>
+  <view class='wd-benediction-item-body'>
+    <view class='wd-benediction-nickname'>匿名</view>
+    <view class='wd-benediction-content'>祝你如愿哦</view>
+  </view>
+</view>
+<view class="wd-benediction-item">
+  <view class='wd-benediction-avatar'>
+    <image src='/assets/img/avatar/avatar2.png'></image>
+  </view>
+  <view class='wd-benediction-item-body'>
+    <view class='wd-benediction-nickname'>匿名</view>
+    <view class='wd-benediction-content'>祝你如愿哦</view>
+  </view>
+</view>
+<view class='wd-btn-bar'>
+  <view class='wd-btn'>我也要许愿</view>
+  <view class='wd-btn'>祝福支持</view>
+</view>

@@ -1,8 +1,10 @@
 {
   "pages": [
-    "pages/wish/wish",
-    "pages/user/user",  
     "pages/home/home",
+    "pages/wishdetails/wishdetails",
+    "pages/wallet/wallet",
+    "pages/wish/wish",
+    "pages/user/user",
     "pages/logs/logs"
   ],
   "window": {

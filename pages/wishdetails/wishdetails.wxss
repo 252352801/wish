@@ -1,0 +1,170 @@
+/* pages/wishdetails/wishdetails.wxss */
+
+page {
+  padding-bottom: 98rpx;
+}
+
+.wd-banner {
+  padding-top: 47.33%;
+  position: relative;
+}
+
+.wd-banner-body {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: #ea5958;
+}
+
+.wd-banner-body image {
+  width: 100%;
+  height: 100%;
+}
+
+.wd-avatar-wrapper {
+  width: 166rpx;
+  height: 166rpx;
+  border: 8rpx solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  margin: -83rpx auto 10rpx auto;
+  position: relative;
+  z-index: 1;
+}
+
+.wd-avatar-body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  box-sizing: border-box;
+}
+
+.wd-avatar-body image {
+  width: 100%;
+  height: 100%;
+}
+
+.wd-nickname {
+  font-size: 24rpx;
+  color: rgb(102, 102, 102);
+}
+
+.wd-content {
+  min-height: 200rpx;
+  margin: 50rpx 24rpx 70rpx 24rpx;
+  position: relative;
+  padding: 25rpx;
+  border: 1rpx solid #eee;
+}
+
+.wd-title {
+  font-size: 36rpx;
+  color: rgb(234, 89, 88);
+  display: inline-block;
+  background-color: #fff;
+  position: relative;
+  top: -64rpx;
+  padding: 12rpx 24rpx;
+}
+
+.wd-time {
+  font-size: 24rpx;
+  color: rgb(153, 153, 153);
+  margin-top: -64rpx;
+  margin-bottom: 28rpx;
+}
+
+.wd-description {
+  font-size: 28rpx;
+  color: rgb(51, 51, 51);
+}
+
+.wd-btn-collapse {
+  color: #999;
+  font-size: 24rpx;
+}
+
+.wd-benediction-title {
+  font-size: 32rpx;
+  color: rgb(51, 51, 51);
+}
+
+.wd-benediction-value {
+  font-size: 24rpx;
+  color: rgb(51, 51, 51);
+  margin-bottom: 38rpx;
+}
+
+.wd-benediction-value text {
+  color: rgb(234, 89, 88);
+  padding: 0 5rpx;
+}
+
+.wd-btn-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 98rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wd-btn {
+  font-size: 26rpx;
+  text-align: center;
+  flex-grow: 1;
+  height: 100%;
+  line-height: 98rpx;
+}
+
+.wd-btn:first-child {
+  background-color: rgb(237, 237, 237);
+  color: rgb(51, 51, 51);
+}
+
+.wd-btn:first-child:active {
+  background-color: rgb(222, 222, 222);
+}
+
+.wd-btn:last-child {
+  background-color: rgb(234, 89, 88);
+  color: #fff;
+}
+
+.wd-btn:last-child:active {
+  background-color: rgb(224, 74, 73);
+}
+
+.wd-benediction-item {
+  padding: 0 24rpx 24rpx 136rpx;
+  display: flex;
+  align-items: center;
+}
+.wd-benediction-avatar {
+  position: absolute;
+  left: 24rpx;
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.wd-benediction-avatar image {
+  width: 100%;
+  height: 100%;
+}
+
+.wd-benediction-nickname {
+  font-size: 30rpx;
+  color: rgb(51, 51, 51);
+}
+
+.wd-benediction-content {
+  font-size: 24rpx;
+  color: rgb(153, 153, 153);
+}

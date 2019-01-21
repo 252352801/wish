@@ -1,0 +1,17 @@
+<!--pages/wallet/wallet.wxml-->
+<image src='/assets/img/wallet/icon_rmb.png' class="wallet-icon"></image>
+<view class='wallet-text-bar'>
+  <text class='wallet-text'>我的零钱</text>
+</view>
+<view class='wallet-balance-bar'>
+  <text class='wallet-balance'>¥5.45</text>
+</view>
+<view class='wallet-btn-bar'>
+  <button class="wallet-btn">提现</button>
+</view>
+<view class='wallet-tips'>
+  申请提现后，在1到3个工作日内提现到你到微信
+</view>
+<view class='wallet-tips'>
+  平台收取2%到手续费
+</view>

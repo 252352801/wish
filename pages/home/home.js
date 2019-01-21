@@ -9,7 +9,27 @@ Page({
    */
   data: {
     list: [{
-      avatar: '/assets/img/background/home_banner.png',
+      avatar: '/assets/img/avatar/avatar2.png',
+      nickname: '下次我请',
+      moments: 1000
+    }, {
+      avatar: '/assets/img/avatar/avatar2.png',
+      nickname: '下次我请',
+      moments: 1000
+    }, {
+      avatar: '/assets/img/avatar/avatar2.png',
+      nickname: '下次我请',
+      moments: 1000
+    }, {
+      avatar: '/assets/img/avatar/avatar2.png',
+      nickname: '下次我请',
+      moments: 1000
+    }, {
+      avatar: '/assets/img/avatar/avatar2.png',
+      nickname: '下次我请',
+      moments: 1000
+    }, {
+      avatar: '/assets/img/avatar/avatar2.png',
       nickname: '下次我请',
       moments: 1000
     }, {
@@ -17,27 +37,7 @@ Page({
       nickname: '下次我请',
       moments: 1000
     }, {
-      avatar: '/assets/img/background/home_banner.png',
-      nickname: '下次我请',
-      moments: 1000
-    }, {
-      avatar: '/assets/img/background/home_banner.png',
-      nickname: '下次我请',
-      moments: 1000
-    }, {
-      avatar: '/assets/img/background/home_banner.png',
-      nickname: '下次我请',
-      moments: 1000
-    }, {
-      avatar: '/assets/img/background/home_banner.png',
-      nickname: '下次我请',
-      moments: 1000
-    }, {
-      avatar: '/assets/img/background/home_banner.png',
-      nickname: '下次我请',
-      moments: 1000
-    }, {
-      avatar: '/assets/img/background/home_banner.png',
+      avatar: '/assets/img/avatar/avatar2.png',
       nickname: '下次我请',
       moments: 1000
     }]

@@ -7,8 +7,10 @@
       </view>
       <view class='user-nickname'>下次我请</view>
       <view class='user-wallet'>
-        <image src='/assets/img/user/icon_wallet.png'></image>
-        <text>¥100</text>
+        <navigator url="/pages/wallet/wallet" >
+          <image src='/assets/img/user/icon_wallet.png'></image>
+          <text>¥100</text>
+        </navigator>
       </view>
     </view>
   </view>
