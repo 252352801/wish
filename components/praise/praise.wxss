@@ -1,0 +1,16 @@
+/* components/praise/praise.wxss */
+@import '/assets/iconfont/iconfont.wxss';
+
+.praise-count {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 24rpx;
+  line-height: 32rpx;
+}
+
+.icon-heart {
+  vertical-align: middle;
+  line-height: 32rpx;
+  margin-right: 4rpx;
+  color:rgb(180, 180, 180)
+}

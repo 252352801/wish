@@ -1,0 +1,25 @@
+<!--pages/friendswish/friendswish.wxml-->
+<view class='panel-wish' wx:for="{{list}}" wx:key="index" bindtap='goDetailPage'>
+  <view class='panel-wish-header'>
+    <view class='pull-left'>下次我请</view>
+    <view class='pull-right'>
+      <praise value="200"></praise>
+    </view>
+  </view>
+  <view class='panel-wish-body'>
+    <view class='panel-wish-avatar img-container'>
+      <image src='/assets/img/avatar/avatar2.png'></image>
+    </view>
+    <view class='panel-wish-title'>我的2019愿望</view>
+    <view class='panel-wish-content'>我要脱单的啊的啊啊啊啊啊啊</view>
+  </view>
+   <view class='panel-wish-footer'>
+    许愿日期：2019/04/01 00:00
+   </view>
+</view>
+<view class='null-container'>
+  <image src='/assets/img/background/no_wish.png' style='width:206rpx;height:234rpx;'></image>
+  <view class='null-text'>天啊! 还没有好友许愿
+    <navigator>去邀请</navigator>
+  </view>
+</view>

@@ -1,0 +1,12 @@
+/* pages/generateshareimg/generateshareimg.wxss */
+page{
+  background-color: #f0f0f0;
+  padding: 0 88rpx;
+}
+.img-share-wish{
+  display: block;
+  width:576rpx;
+  height: 890rpx;
+  background-color: #fff;
+  margin: 110rpx auto;
+}

@@ -1,0 +1,92 @@
+/* pages/mywish/mywish.wxss */
+
+page {
+  background-color: rgb(236, 237, 238);
+}
+
+.card-wish {
+  background-color: #fff;
+  box-shadow: 0 0 6rpx #dcdcdc;
+  padding: 6rpx 24rpx 24rpx 18rpx;
+  margin-top: 20rpx;
+}
+
+.card-wish-header {
+  height: 76rpx;
+  padding: 24rpx 0 24rpx 0;
+  display: flex;
+  align-items: center;
+}
+
+.card-wish-btn, .card-wish-time, .card-wish-praise {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.card-wish-btn {
+  padding: 4rpx 30rpx;
+  border-radius: 30rpx;
+  line-height: 40rpx;
+}
+.card-wish-btn:active{
+  opacity: 0.75;
+}
+.card-wish-btn.card-wish-btn-primary{
+  color: rgb(236, 89, 88);
+  border: 1px solid rgb(234, 89, 88);
+}
+.card-wish-btn.card-wish-btn-info{
+  color: rgb(49, 144, 241);
+  border: 1px solid rgb(49, 144, 241);
+}
+
+.card-wish-time {
+  margin-left: 14rpx;
+  font-size: 24rpx;
+  color: rgb(51, 51, 51);
+  letter-spacing: 4rpx;
+  flex-grow: 2;
+}
+
+.card-wish-praise {
+  display: block;
+  color: rgb(153, 153, 153);
+  flex-grow: 1;
+  text-align: right;
+}
+
+.card-wish-praise text {
+  font-size: 24rpx;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.card-wish-body {
+  padding-right: 196rpx;
+  position: relative;
+  min-height: 136rpx;
+}
+
+.card-wish-title {
+  font-size: 30rpx;
+}
+
+.card-wish-content {
+  font-size: 24rpx;
+  color: rgb(153, 153, 153);
+}
+
+.card-wish-img {
+  width: 176rpx;
+  height: 136rpx;
+  border-radius: 8rpx;
+  background-color: #f0f0f0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  overflow: hidden;
+}
+.card-wish-img image{
+  width: 100%;
+  height: 100%;
+}

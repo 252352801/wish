@@ -7,14 +7,22 @@ Page({
   data: {
     titleOptions: ['我的2019愿望', '彩票中奖', '12点上班', '美梦成真', '脱单'],
     index: 0,
+    content: '',
     datetime: '2016-09-01',
   },
-
+  userInfoHandler(res) {
+    console.log(res)
+  },
   bindPickerChange(e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       index: e.detail.value
     })
+  },
+  setInputValue(e) {
+    const newData = {};
+    newData[e.target.dataset.key] = e.detail.value
+    this.setData(newData)
   },
   bindDatetimeChange(e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
@@ -25,14 +33,13 @@ Page({
   togglePase(e) {
 
   },
-  toggleCoupon(e){
+  toggleCoupon(e) {
 
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
   },
 
   /**

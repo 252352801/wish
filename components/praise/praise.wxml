@@ -1,0 +1,3 @@
+<!--components/praise/praise.wxml-->
+<text class='iconfont icon-heart'></text>
+<text class='praise-count'>{{value}}</text>

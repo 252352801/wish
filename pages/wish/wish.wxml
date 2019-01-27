@@ -16,7 +16,8 @@
       <view class='form-item-body'>
         <label>我的愿望</label>
         <view class="form-item-content">
-          <textarea auto-height placeholder="我的愿望" />
+          <textarea auto-height bindinput='setInputValue' data-key='content'/>
+          <text class='form-placeholder' wx:if="{{!content}}">填写愿望内容</text>
         </view>
       </view>
     </view>
@@ -47,11 +48,11 @@
         </view>
       </view>
       <view class='form-item-tips'>1.允许发红包的方式祝福，仅限安卓用户</view>
-      <view class='form-item-tips'>2.红包可体现到微信，收取2%的手续费</view>
+      <view class='form-item-tips'>2.红包可提现到微信，收取2%的手续费</view>
     </view>
 
     <view class='wish-btn-bar'>
-      <button type="primary">许下愿望</button>
+      <button type="primary" open-type="getUserInfo" bindgetuserinfo="userInfoHandler">许下愿望</button>
     </view>
 
   </view>

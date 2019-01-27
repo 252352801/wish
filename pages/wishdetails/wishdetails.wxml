@@ -11,15 +11,35 @@
 </view>
 <view class='wd-nickname text-center'>下次我请</view>
 <view class='wd-content text-center'>
-  <view class='wd-title'>我的2019愿望</view>
-  <view class='wd-time'>愿望提醒时间：2019-10-07 00:00:00</view>
-  <view class='wd-description'>我要脱单脱单脱单脱单脱单，不要再做狗了，不要了不要了不要了不要了不要了不要了不要了不要了不要了不要了不要了不要了不要了不要了不要了</view>
-  <view class='wd-btn-collapse'>展开</view>
+  <image src='/assets/img/wishdetails/bg_l_t.png'></image>
+  <image src='/assets/img/wishdetails/bg_r_t.png'></image>
+  <image src='/assets/img/wishdetails/bg_r_b.png'></image>
+  <image src='/assets/img/wishdetails/bg_l_b.png'></image>
+  <view class='wd-content-body'>
+    <view class='wd-title'>我的2019愿望</view>
+    <view class='wd-time'>愿望提醒时间：2019-10-07 00:00:00</view>
+    <view class='wd-description'>我要脱单脱单脱单脱单脱单，不要再做狗了，不要了不要了不要了不要了不要了不要了不要了不要了不要了不要了不要了不要了不要了不要了不要了</view>
+    <view class='wd-btn-collapse'>展开</view>
+  </view>
 </view>
-<view class='wd-benediction-title text-center'>好友祝福</view>
+<view class='wd-benediction-title text-center'>
+  <image src='/assets/img/wishdetails/leaf_l.png'></image>
+  <text>好友祝福</text>
+  <image src='/assets/img/wishdetails/leaf_r.png'></image>
+</view>
 <view class='wd-benediction-value text-center'>已有
-  <text>0</text> 个好友祝福 收到
-  <text>0</text> 个红包
+  <text>2</text> 个好友祝福 收到
+  <text>2</text> 个红包
+</view>
+<view class="wd-benediction-item">
+  <view class='wd-benediction-avatar'>
+    <image src='/assets/img/avatar/avatar2.png'></image>
+  </view>
+  <view class='wd-benediction-item-body'>
+    <view class='wd-benediction-nickname'>匿名</view>
+    <view class='wd-benediction-content'>祝你如愿哦</view>
+  </view>
+  <image class='wd-benediction-coupon' src='/assets/img/wishdetails/coupon.png'></image>
 </view>
 <view class="wd-benediction-item">
   <view class='wd-benediction-avatar'>
@@ -30,16 +50,18 @@
     <view class='wd-benediction-content'>祝你如愿哦</view>
   </view>
 </view>
-<view class="wd-benediction-item">
-  <view class='wd-benediction-avatar'>
-    <image src='/assets/img/avatar/avatar2.png'></image>
-  </view>
-  <view class='wd-benediction-item-body'>
-    <view class='wd-benediction-nickname'>匿名</view>
-    <view class='wd-benediction-content'>祝你如愿哦</view>
+<view class='null-container'>
+  <image src='/assets/img/background/no_bene.png' style='width:156rpx;height:134rpx;'></image>
+  <view class='null-text'>
+    <view>还未有好友祝福，</view>
+    <view>快邀请好友们一起参加吧</view>
   </view>
 </view>
-<view class='wd-btn-bar'>
-  <view class='wd-btn'>我也要许愿</view>
+<view class='wd-btn-bar' wx:if="{{origin==='mine'}}">
+  <view class='wd-btn' bindtap='go' data-link='/pages/generateshareimg/generateshareimg'>分享到朋友圈</view>
+  <view class='wd-btn'>邀请好友祝福</view>
+</view>
+<view class='wd-btn-bar' wx:if="{{origin==='friend'}}">
+  <view class='wd-btn' bindtap='go' data-link='/pages/wish/wish'>我也要许愿</view>
   <view class='wd-btn'>祝福支持</view>
 </view>

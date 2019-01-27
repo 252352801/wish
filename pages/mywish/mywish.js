@@ -1,47 +1,56 @@
-// pages/user/user.js
+// pages/mywish/mywish.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    userInfo: {
-
-    }
+    tabs: [{
+      text: '待提醒愿望'
+    }, {
+      text: '已提醒愿望'
+    }],
+    tabIndex: 0,
+    list: [{
+      remindTime: '2019/04/01 12:00',
+      title: '我的2019愿望',
+      image: '',
+      content: '我要脱单脱单脱单脱单啊啊啊啊啊啊啊啊',
+      praise: 700
+    }, {
+      remindTime: '2019/04/01 12:00',
+      image: '',
+      title: '我的2019愿望',
+      content: '我要脱单脱单脱单脱单啊啊啊啊啊啊啊啊',
+      praise: 700
+    }]
   },
-
-  go(e) {
-    wx.navigateTo({
-      url: e.target.dataset.link,
+  /**
+   * tab切换
+   */
+  changeTabIndex(e) {
+    console.log(e)
+    console.log(+e.target.dataset.index)
+    this.setData({
+      tabIndex: +e.target.dataset.index
     })
   },
-  userInfoHandler(res){
-    console.log(res)
-    if (res.detail.userInfo){
-      this.setData({
-        userInfo: res.detail.userInfo
-      })
-    }
+
+  /**
+   * 前往详情页
+   */
+  goDetailPage() {
+    wx.navigateTo({
+      url: `/pages/wishdetails/wishdetails?origin=mine`,
+    })
   },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    wx.getUserInfo({
-      success: (res) => {
-        console.log(res)
-        if (res.userInfo) {
-          this.setData({
-            userInfo: res.userInfo
-          })
-        }
-      },
-      fail: (res) => {
-        console.log(res)
-      }
-    })
-  },
 
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

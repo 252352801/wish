@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "praise": "/components/praise/praise"
+  }
+}

@@ -2,8 +2,8 @@
 var http = require('../../utils/http.js');
 var request = http.request;
 var filter = require('../../utils/filters.js');
-//var lostSigninIntercept = require('../../utils/signin.interceptor.js').lostSigninIntercept;
-Page({
+var lostSigninIntercept = require('../../utils/signin.interceptor.js').lostSigninIntercept;
+Page(lostSigninIntercept({
   /**
    * 页面的初始数据
    */
@@ -40,14 +40,20 @@ Page({
       avatar: '/assets/img/avatar/avatar2.png',
       nickname: '下次我请',
       moments: 1000
-    }]
+    }],
+    tabs: ['获得祝福', '获得红包'],
+    tabIndex: 0,
   },
-
+  changeTab:function(e) {
+    console.log(e)
+    this.setData({
+      tabIndex: +e.target.dataset.tab
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
   },
 
   /**
@@ -113,6 +119,5 @@ Page({
    * 获取推荐数据
    */
   getPushData: function(options) {
-
   }
-})
+}))

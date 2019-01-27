@@ -1,7 +1,7 @@
 /* pages/wishdetails/wishdetails.wxss */
 
 page {
-  padding-bottom: 98rpx;
+  padding-bottom: 118rpx;
 }
 
 .wd-banner {
@@ -53,11 +53,39 @@ page {
 }
 
 .wd-content {
-  min-height: 200rpx;
   margin: 50rpx 24rpx 70rpx 24rpx;
   position: relative;
-  padding: 25rpx;
-  border: 1rpx solid #eee;
+  padding-top: 40%;
+}
+.wd-content-body{
+    padding: 25rpx;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top:0;
+    bottom: 0;
+}
+.wd-content image{
+  position: absolute;
+}
+.wd-content image:nth-child(1),.wd-content image:nth-child(2){
+  width: 103rpx;
+  height: 79rpx;
+  top:0;
+}
+.wd-content image:nth-child(1),.wd-content image:nth-child(4){
+  left: 0;
+}
+.wd-content image:nth-child(2),.wd-content image:nth-child(3){
+  right: 0;
+}
+.wd-content image:nth-child(3),.wd-content image:nth-child(4){
+  width: 162rpx;
+  height: 82rpx;
+  bottom:0;
+}
+.wd-content image:nth-child(3){
+  width: 322rpx;
 }
 
 .wd-title {
@@ -90,6 +118,15 @@ page {
 .wd-benediction-title {
   font-size: 32rpx;
   color: rgb(51, 51, 51);
+}
+.wd-benediction-title image{
+  display: inline-block;
+  vertical-align: middle;
+  width: 80rpx;
+  height: 15rpx;
+}
+.wd-benediction-title text{
+  padding: 0 16rpx;
 }
 
 .wd-benediction-value {
@@ -141,9 +178,10 @@ page {
 }
 
 .wd-benediction-item {
-  padding: 0 24rpx 24rpx 136rpx;
+  padding: 0 24rpx 32rpx 136rpx;
   display: flex;
   align-items: center;
+  position: relative;
 }
 .wd-benediction-avatar {
   position: absolute;
@@ -153,7 +191,13 @@ page {
   border-radius: 50%;
   overflow: hidden;
 }
-
+.wd-benediction-coupon{
+  width: 28rpx;
+  height: 30rpx;
+  position: absolute;
+  right: 24rpx;
+  top:4rpx;
+}
 .wd-benediction-avatar image {
   width: 100%;
   height: 100%;

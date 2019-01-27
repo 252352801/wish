@@ -3,8 +3,8 @@
  */
 const env = {
   dev: false,
-  test: false,
-  prod: true
+  test: true,
+  prod: false
 };  
 /**
  * 接口地址
@@ -12,7 +12,7 @@ const env = {
 const host = {
   dev: 'http://192.168.10.10:8082/ifmp-api/',
   //dev: 'http://192.168.10.24:8080/ifmp-api/',
-  test: 'http://192.168.10.10:9082/ifmp-api/',
+  test: 'http://129.204.91.72:8080/',
   prod: 'https://moneyapi.husha56.com/ifmp/'
 };
 /**
@@ -52,19 +52,26 @@ function request(options) {
   if (!(options.header && typeof options.header === 'object')) {
     options.header = {};
   }
-  options.header['Content-Type'] = 'application/x-www-form-urlencoded';//Content-Type
+  //options.header['Content-Type'] = 'application/x-www-form-urlencoded';//Content-Type
   options.header.token = wx.getStorageSync('token')||'';//token头
   let orgSuccessCB = options.success;//初始的成功回调
   let filterSuccessCB=function(res){//带过滤的回调函数
-    //if (res.statusCode==411){
-    if (res.statusCode == 200 && res.data && typeof res.data === 'object' && res.data.status==411) {
-      //登陆过期处理
-      console.log('过期了...');
-      // wx.redirectTo({
-      //   url: '/pages/signin/signin'
-      // });
-    } else {
-      orgSuccessCB.call(options, res);
+    const formatData={
+      ok:false,
+      msg:'',
+      body:{}
+    }
+    const data=res.data
+    if (data && typeof data==='object'){
+      formatData.ok = (data.resultcode + '' === '000000')
+      formatData.msg = data.resultdesc
+      const ingores = ['resultcode','resultdesc']
+      for (const k in data){
+        if (ingores.indexOf(k)<0){
+          formatData.body[k] = data[k]
+        }
+      }
+      orgSuccessCB.call(options, formatData);
     }
   };
   options.success = filterSuccessCB;

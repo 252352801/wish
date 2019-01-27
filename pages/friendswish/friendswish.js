@@ -1,45 +1,26 @@
-// pages/user/user.js
+// pages/friendswish/friendswish.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    userInfo: {
-
-    }
+    list: [{}, {}]
   },
 
-  go(e) {
+  /**
+   * 前往详情页
+   */
+  goDetailPage() {
     wx.navigateTo({
-      url: e.target.dataset.link,
+      url: `/pages/wishdetails/wishdetails?origin=friend`,
     })
-  },
-  userInfoHandler(res){
-    console.log(res)
-    if (res.detail.userInfo){
-      this.setData({
-        userInfo: res.detail.userInfo
-      })
-    }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    wx.getUserInfo({
-      success: (res) => {
-        console.log(res)
-        if (res.userInfo) {
-          this.setData({
-            userInfo: res.userInfo
-          })
-        }
-      },
-      fail: (res) => {
-        console.log(res)
-      }
-    })
+
   },
 
   /**

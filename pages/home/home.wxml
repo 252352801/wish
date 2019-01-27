@@ -6,8 +6,7 @@
     </view>
   </view>
   <view class='home-tab'>
-    <view class='home-tab-item active'>获得祝福</view>
-    <view class='home-tab-item'>获得红包</view>
+    <view wx:for="{{tabs}}" wx:key="index" class='home-tab-item{{tabIndex===index?" active":""}}' hover-class='hover' bindtap='changeTab' data-tab='{{index}}'>{{item}}</view>
   </view>
   <view class='home-list' wx:for="{{list}}" wx:key="index">
     <view class='home-list-index'>{{index+1}}</view>
@@ -15,9 +14,14 @@
       <image src="{{item.avatar}}"></image>
     </view>
     <view class='home-list-nickname'>{{item.nickname}}</view>
-    <view class='home-list-moments'>
-      <view class='icon-heart'></view>
-      <view>{{item.moments}}</view>
+    <view class='home-list-receive' wx:if="{{tabIndex===0}}">
+      <praise value="999"></praise>
+    </view>
+    <view wx:if="{{tabIndex===1}}">
+      <view class='comm-icon-coupon'>
+        <image src='/assets/img/icon/icon_coupon.png'></image>
+      </view>
+      <text class='comm-rmb'>¥100</text>
     </view>
   </view>
 </view>

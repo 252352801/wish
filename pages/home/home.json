@@ -1,8 +1,6 @@
 {
   "enablePullDownRefresh": true,
   "usingComponents": {
-    "currency": "/components/currency/currency",
-    "wallets-password": "/components/wallets-password/wallets-password",
-    "percent": "/components/percent/percent"
+    "praise": "/components/praise/praise"
   }
 }

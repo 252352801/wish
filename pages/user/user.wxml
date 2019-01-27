@@ -3,11 +3,16 @@
   <view class='user-header'>
     <view class='user-header-body'>
       <view class='user-avatar'>
-        <image src='/assets/img/background/home_banner.png'></image>
+        <image src='{{userInfo.avatarUrl}}'></image>
       </view>
-      <view class='user-nickname'>下次我请</view>
+      <view class='user-nickname'>
+        <text wx:if="{{userInfo.nickName}}">{{userInfo.nickName}}</text>
+        <view wx:if="{{!userInfo.nickName}}">点击登陆
+          <button type='default' size='mini' class='user-nickname' wx:if="{{!userInfo.nickName}}" open-type="getUserInfo" bindgetuserinfo="userInfoHandler"></button>
+        </view>
+      </view>
       <view class='user-wallet'>
-        <navigator url="/pages/wallet/wallet" >
+        <navigator url="/pages/wallet/wallet">
           <image src='/assets/img/user/icon_wallet.png'></image>
           <text>¥100</text>
         </navigator>
@@ -18,19 +23,19 @@
     <view class="user-menu-icon">
       <image src='/assets/img/user/icon_mywish.png'></image>
     </view>
-    <view class="user-menu-body">我的愿望</view>
+    <view class="user-menu-body" bindtap='go' data-link='/pages/mywish/mywish'>我的愿望</view>
   </view>
   <view class='user-menu'>
     <view class="user-menu-icon">
       <image src='/assets/img/user/icon_friendswish.png'></image>
     </view>
-    <view class="user-menu-body">好友愿望</view>
+    <view class="user-menu-body" bindtap='go' data-link='/pages/friendswish/friendswish'>好友愿望</view>
 
   </view>
   <view class='user-menu'>
     <view class="user-menu-icon">
       <image src='/assets/img/user/icon_receive.png'></image>
     </view>
-    <view class="user-menu-body">收到的祝福</view>
+    <view class="user-menu-body" bindtap='go' data-link='/pages/comments/comments'>收到的祝福</view>
   </view>
 </view>
