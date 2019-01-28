@@ -1,0 +1,53 @@
+.cropper-container {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.85);
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.cropper-img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -110rpx;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  background: #eee;
+}
+
+.cropper-img image {
+  height: 400px;
+}
+
+.cropper-imgcrop {
+  position: absolute;
+  left: -50000rpx;
+  top: -500000rpx;
+}
+
+.cropper-footer {
+  position: absolute;
+  width: 100%;
+  height: 110rpx;
+  color: #fff;
+  background: #000;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.cropper-footer view {
+  width: 30%;
+  text-align: center;
+}
+
+.cropper-background {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  z-index: -1;
+}

@@ -1,10 +1,11 @@
 {
   "pages": [
-    "pages/home/home",
+    "pages/generateshareimg/generateshareimg",
     "pages/user/user",
     "pages/wish/wish",
+    "pages/demo/demo",
+    "pages/home/home",
     "pages/wishsuccess/wishsuccess",
-    "pages/generateshareimg/generateshareimg",
     "pages/wallet/wallet",
     "pages/mywish/mywish",
     "pages/friendswish/friendswish",
@@ -16,7 +17,7 @@
     "backgroundColor": "#D7625D",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#D7625D",
-    "navigationBarTitleText": "我的小心愿",
+    "navigationBarTitleText": "",
     "navigationBarTextStyle": "#fff"
   },
   "tabBar": {

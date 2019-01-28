@@ -5,18 +5,18 @@ Page({
    * 页面的初始数据
    */
   data: {
+    bannerUrl:'/assets/img/wish/banner.png',
     titleOptions: ['我的2019愿望', '彩票中奖', '12点上班', '美梦成真', '脱单'],
-    index: 0,
+    titleIndex: 0,
     content: '',
-    datetime: '2016-09-01',
+    remindDatetime: '',
   },
   userInfoHandler(res) {
     console.log(res)
   },
-  bindPickerChange(e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
+  onTitlePickerChange(e){
     this.setData({
-      index: e.detail.value
+      titleIndex: e.detail.value
     })
   },
   setInputValue(e) {
@@ -24,10 +24,9 @@ Page({
     newData[e.target.dataset.key] = e.detail.value
     this.setData(newData)
   },
-  bindDatetimeChange(e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
+  setRemindDatetime(e){
     this.setData({
-      date: e.detail.value
+      remindDatetime:e.detail.value
     })
   },
   togglePase(e) {
@@ -35,6 +34,15 @@ Page({
   },
   toggleCoupon(e) {
 
+  },
+  pickBannerImg(){
+    this.selectComponent('#cropper').chooseImage()
+  },
+  setWishBanner(e){
+    console.log(e.detail.url)
+    this.setData({
+      bannerUrl: e.detail.url
+    })
   },
   /**
    * 生命周期函数--监听页面加载

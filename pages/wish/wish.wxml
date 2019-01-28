@@ -1,13 +1,13 @@
 <!--pages/wish/wish.wxml-->
 <view class='page-wish'>
-  <view class='wish-banner'>
+  <view class='wish-banner' bindtap='pickBannerImg'>
     <view class='wish-banner-body'>
-      <image src='/assets/img/wish/banner.png'></image>
+      <image src="{{bannerUrl}}"></image>
     </view>
   </view>
   <view class='wish-title-select'>
-    <picker bindchange="bindPickerChange" value="{{index}}" range="{{titleOptions}}">
-      <view class="picker">{{titleOptions[index]}}</view>
+    <picker bindchange="onTitlePickerChange" value="{{titleIndex}}" range="{{titleOptions}}">
+      <view class="picker">{{titleOptions[titleIndex]}}</view>
       <view class="wish-title-arrow"></view>
     </picker>
   </view>
@@ -25,9 +25,7 @@
       <view class='form-item-body'>
         <label>愿望提醒时间</label>
         <view class="form-item-content">
-          <picker mode="date" value="{{datetime}}" start="2015-09-01" end="2017-09-01" bindchange="bindDatetimeChange">
-            <text class="">{{datetime}}</text>
-          </picker>
+            <datetime-picker bind:change="setRemindDatetime" value="{{remindDatetime}}"></datetime-picker>
         </view>
       </view>
     </view>
@@ -57,3 +55,4 @@
 
   </view>
 </view>
+ <cropper bind:success="setWishBanner" id="cropper"  clipWidth="{{750}}" clipHeight="{{355}}"></cropper>

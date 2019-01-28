@@ -1,0 +1,9 @@
+<!--components/datetime-picker.wxml-->
+<view >
+  <picker mode="multiSelector" value="{{dateTime}}" bindcancel="cancel" bindchange="changeDateTime" bindcolumnchange="changeDateTimeColumn" range="{{dateTimeArray}}">
+    <view  class='dp-placeholder' wx:if="{{!value}}">请选择</view>
+    <view  wx:if="{{value}}">
+       {{dateTimeArray[0][dateTime[0]]}}-{{dateTimeArray[1][dateTime[1]]}}-{{dateTimeArray[2][dateTime[2]]}} {{dateTimeArray[3][dateTime[3]]}}:{{dateTimeArray[4][dateTime[4]]}}:{{dateTimeArray[5][dateTime[5]]}}
+    </view>
+  </picker>
+</view>

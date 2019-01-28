@@ -4,7 +4,7 @@ var filter = require('./utils/filters.js');
 App({
   onLaunch: function() {},
   onShow: function() {
-    this.testIsLogin()
+    //this.testIsLogin()
   },
   listeners: [
     /*{

@@ -1,9 +1,5 @@
 {
   "usingComponents": {
-    "cropper": "../../components/cropper/cropper",
     "datetime-picker": "../../components/datetime-picker/datetime-picker"
-  },
-  "window": {
-    "backgroundColor": "#6dd17b"
   }
 }

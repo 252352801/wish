@@ -198,6 +198,71 @@ function div(val1, val2) {
   r2 = Number(val2.toString().replace(".", ""))
   return mul((r1 / r2), Math.pow(10, decimal2 - decimal1));
 }
+
+
+/**
+ * 日期时间格式化
+ * @param {*} datetime
+ * @param {*} format
+ */
+const datetimeFormat = (datetime, format) => {
+  const value = datetime
+  let fmt = format
+  if (value) {
+    let date
+    if (value instanceof Date) {
+      date = value
+    } else if (typeof value === 'string') {
+      date = (dateStr => {
+        let date = new Date(dateStr)
+        if (date + '' === 'Invalid Date') {
+          date = new Date(dateStr + ''.replace(/-/g, '/').replace(/\.\d+$/, ''))
+          if (date + '' === 'Invalid Date') {
+            return null
+          }
+        }
+        return date
+      })(value)
+    } else if (typeof value === 'number') {
+      date = new Date(value)
+    }
+    if (!date) {
+      return value
+    }
+    let o = {
+      'M+': date.getMonth() + 1, // 月份
+      'd+': date.getDate(), // 日
+      'h+': date.getHours(), // 小时
+      'm+': date.getMinutes(), // 分
+      's+': date.getSeconds(), // 秒
+      'q+': Math.floor((date.getMonth() + 3) / 3), // 季度
+      S: date.getMilliseconds() // 毫秒
+    }
+    if (!fmt) {
+      fmt = this.format
+    }
+    if (/(y+)/.test(fmt)) {
+      fmt = fmt.replace(
+        RegExp.$1,
+        (date.getFullYear() + '').substr(4 - RegExp.$1.length)
+      )
+    }
+    for (var k in o) {
+      if (new RegExp('(' + k + ')').test(fmt)) {
+        fmt = fmt.replace(
+          RegExp.$1,
+          RegExp.$1.length === 1
+            ? o[k]
+            : ('00' + o[k]).substr(('' + o[k]).length)
+        )
+      }
+    }
+    return fmt
+  } else {
+    return value
+  }
+}
+
 module.exports = {
   formatTime: formatTime,
   isCurrency: isCurrency, //是否是金额
@@ -206,6 +271,7 @@ module.exports = {
   hideCellphoneNo: hideCellphoneNo, //隐藏部分身份证号
   hideBankCardNo: hideBankCardNo, //隐藏部分银行卡号
   hideCompanyName: hideCompanyName, //隐藏部分公司名
+  datetimeFormat: datetimeFormat,
   add: add, //加
   mul: mul, //乘
   div: div, //除

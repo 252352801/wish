@@ -1,0 +1,4 @@
+/* components/datetime-picker.wxss */
+.dp-placeholder{
+  color:rgb(153,153,153);
+}

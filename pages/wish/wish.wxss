@@ -13,7 +13,7 @@ page {
   right: 0;
   top: 0;
   bottom: 0;
-  background-color: #ea5958;
+  background-color: #D7625D;
 }
 
 .wish-banner-body image {
