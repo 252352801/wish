@@ -1,3 +1,7 @@
 <!--pages/generateshareimg/generateshareimg.wxml-->
-<canvas class='img-share-wish' canvas-id="img"></canvas>
-<button type='primary'>保存到相册</button>
+<view>
+  <view class='share-img-container'>
+    <canvas class='share-img' canvas-id="shareImg"></canvas>
+  </view>
+  <button type='primary' class='btn-save-img'>保存到相册</button>
+</view>
