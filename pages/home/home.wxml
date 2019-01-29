@@ -9,7 +9,11 @@
     <view wx:for="{{tabs}}" wx:key="index" class='home-tab-item{{tabIndex===index?" active":""}}' hover-class='hover' bindtap='changeTab' data-tab='{{index}}'>{{item}}</view>
   </view>
   <view class='home-list' wx:for="{{list}}" wx:key="index">
-    <view class='home-list-index'>{{index+1}}</view>
+    <view class='home-list-index'>{{index>2?index+1:''}}
+      <image src='/assets/img/icon/icon_rank1.png' wx:if="{{index===0}}"></image>
+      <image src='/assets/img/icon/icon_rank2.png' wx:if="{{index===1}}"></image>
+      <image src='/assets/img/icon/icon_rank3.png' wx:if="{{index===2}}"></image>
+    </view>
     <view class='home-list-avatar'>
       <image src="{{item.avatar}}"></image>
     </view>

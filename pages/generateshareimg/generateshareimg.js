@@ -20,7 +20,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    imgPath:''
   },
 
   /**
@@ -37,7 +37,7 @@ Page({
       title:'我的2019愿望',
       content:'愿望内容愿望内容愿望内容愿望内容愿望愿望内容愿望内容愿望内容愿望内容愿望愿望内容愿望内容愿望内容愿望内容愿望愿望内容愿望内容愿望内容愿望内容愿望容愿望内容愿望容愿望内容愿望',
     }
-    const qrcode ='/assets/img/qrcode.png';
+    const qrcode ='/assets/img/qr.jpg';
 
     const sysInfo = wx.getSystemInfoSync()
     console.log(sysInfo)
@@ -45,6 +45,10 @@ Page({
     const ctx = wx.createCanvasContext('shareImg')
     console.log(ctx)
 
+    ctx.fillStyle = '#fff';
+
+    //draw background / rect on entire canvas
+    ctx.fillRect(0, 0, 288, 445);
     //banner
     ctx.drawImage(wish.image, 0, 0, 288, 136)
 
@@ -107,26 +111,40 @@ Page({
     //二维码
     ctx.drawImage(qrcode, 170, 334, 100, 100)
     //绘制
-    ctx.draw()
-
-  
-    setTimeout(()=>{
+    ctx.draw(false,()=>{
       wx.canvasToTempFilePath({
         canvasId: 'shareImg',
         x: 0,
         y: 0,
         width: 288,
         height: 445,
-        destWidth: 288,
-        destHeight: 445,
-        success: function (res) {
+        success:  (res)=> {
           console.log(res)
           console.log(res.tempFilePath)
+          this.setData({
+            imgPath: res.tempFilePath
+          })
+        },
+        fail: function (res) {
+          console.log(res)
         }
       })
-    },3000)
+    })
   },
 
+  saveImg(){
+    wx.saveImageToPhotosAlbum({
+      filePath: this.data.imgPath,
+      success:(res)=>{
+        wx.showModal({
+          title: '',
+          showCancel:false,
+          confirmText:'好嘞',
+          content: '保存成功！到朋友圈晒一晒吧！',
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

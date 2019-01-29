@@ -1,3 +1,4 @@
+import {user} from './user.js'
 /**
  *环境
  */
@@ -5,7 +6,7 @@ const env = {
   dev: false,
   test: true,
   prod: false
-};  
+};
 /**
  * 接口地址
  */
@@ -46,32 +47,42 @@ function request(options) {
     fail: function (res) { },
     complete: function (res) { }
   };*/
-  if (options && typeof options === 'object' && options.path) {//拼接
+  if (options && typeof options === 'object' && options.path) { //拼接
     options.url = createUrl(options.path);
   }
   if (!(options.header && typeof options.header === 'object')) {
     options.header = {};
   }
   //options.header['Content-Type'] = 'application/x-www-form-urlencoded';//Content-Type
-  options.header.token = wx.getStorageSync('token')||'';//token头
-  let orgSuccessCB = options.success;//初始的成功回调
-  let filterSuccessCB=function(res){//带过滤的回调函数
-    const formatData={
-      ok:false,
-      msg:'',
-      body:{}
+  options.header.token = wx.getStorageSync('token') || ''; //token头
+  let orgSuccessCB = options.success; //初始的成功回调
+  let filterSuccessCB = function(res) { //带过滤的回调函数
+    const formatData = {
+      ok: false,
+      msg: '',
+      body: {}
     }
-    const data=res.data
-    if (data && typeof data==='object'){
-      formatData.ok = (data.resultcode + '' === '000000')
-      formatData.msg = data.resultdesc
-      const ingores = ['resultcode','resultdesc']
-      for (const k in data){
-        if (ingores.indexOf(k)<0){
-          formatData.body[k] = data[k]
+    const data = res.data
+    if (data && typeof data === 'object') {
+      if (data.resultcode + '' === '888888') {
+        //登录超时
+        user.onLogin(() => {
+          request(options)
+        })
+        if (!user.isLogining) {
+          user.login(request)
         }
+      } else {
+        formatData.ok = (data.resultcode + '' === '000000')
+        formatData.msg = data.resultdesc
+        const ingores = ['resultcode', 'resultdesc']
+        for (const k in data) {
+          if (ingores.indexOf(k) < 0) {
+            formatData.body[k] = data[k]
+          }
+        }
+        orgSuccessCB.call(options, formatData);
       }
-      orgSuccessCB.call(options, formatData);
     }
   };
   options.success = filterSuccessCB;
@@ -82,6 +93,6 @@ function request(options) {
 
 
 module.exports = {
-  createUrl: createUrl,//根据当前环境拼接url
-  request: request  //请求
+  createUrl: createUrl, //根据当前环境拼接url
+  request: request //请求
 };

@@ -1,10 +1,11 @@
 //app.js
 var request = require('./utils/http.js').request;
-var filter = require('./utils/filters.js');
+import {user} from './utils/user.js'
 App({
-  onLaunch: function() {},
+  onLaunch: function() {
+    this.testIsLogin()
+  },
   onShow: function() {
-    //this.testIsLogin()
   },
   listeners: [
     /*{
@@ -61,62 +62,15 @@ App({
   testIsLogin: function() {
     wx.checkSession({
       success: res => {
-        console.log(res)
-        console.log('已登录')
-        //this.login()
+        //session有效单无token
+        if (!wx.getStorageSync('token')){
+          user.login(request)
+        }
       },
       fail: res => {
-        console.log('未登录1')
-        this.login()
+       //session无效
+        user.login(request)
       }  
-    })
-  },
-  login: function() {
-    //
-    console.log('登陆')
-    wx.login({
-      success:res=>{
-        console.log(res)
-        if(res.code){
-          console.log(res.code)
-          request({
-            path: 'user/login',
-            data: {
-              code: res.code,
-            },
-            method: 'POST',
-            success: function(res) {
-              console.log(res)
-            },
-            fail: function(res) {},
-            complete: function(res) {},
-          })
-        }
-      }
-    })
-  },
-
-  /**
-   * 检测是否是新用户
-   */
-  checkIsNewUser: function() {
-    return new Promise((resolve, reject) => {
-      request({
-        path: 'member/isNew',
-        method: 'POST',
-        success: (res) => {
-          var isnewuser = false;
-          var response = filter.filterResponse(res);
-          console.log('checkIsNewUser', response);
-          if (response.ok && response.body && typeof response.body === 'object' && response.body.isNew) {
-            isnewuser = true;
-          }
-          resolve(isnewuser);
-        },
-        fail: (res) => {
-          reject(res);
-        }
-      })
     })
   }
 })

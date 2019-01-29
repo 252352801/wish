@@ -1,9 +1,7 @@
 // pages/home/home.js
 var http = require('../../utils/http.js');
 var request = http.request;
-var filter = require('../../utils/filters.js');
-var lostSigninIntercept = require('../../utils/signin.interceptor.js').lostSigninIntercept;
-Page(lostSigninIntercept({
+Page({
   /**
    * 页面的初始数据
    */
@@ -44,7 +42,7 @@ Page(lostSigninIntercept({
     tabs: ['获得祝福', '获得红包'],
     tabIndex: 0,
   },
-  changeTab:function(e) {
+  changeTab: function(e) {
     console.log(e)
     this.setData({
       tabIndex: +e.target.dataset.tab
@@ -53,8 +51,7 @@ Page(lostSigninIntercept({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
-  },
+  onLoad: function(options) {},
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -118,6 +115,5 @@ Page(lostSigninIntercept({
   /**
    * 获取推荐数据
    */
-  getPushData: function(options) {
-  }
-}))
+  getPushData: function(options) {}
+})

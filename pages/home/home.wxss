@@ -57,8 +57,9 @@ page {
    justify-items: center;
 }
 .home-list-index{
-  flex-grow: 2;
   font-size: 18px;
+  width: 50rpx;
+  height: 50rpx;
 }
 .home-list-avatar{
   width: 36px;
@@ -100,4 +101,9 @@ page {
   display: inline-block;
   vertical-align: middle;
   height: 37rpx;
+}
+.home-list-index image{
+  width: 29rpx;
+  height:37rpx;
+  display: inline-block;
 }

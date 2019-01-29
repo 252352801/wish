@@ -1,10 +1,10 @@
 {
   "pages": [
+    "pages/home/home",
     "pages/generateshareimg/generateshareimg",
     "pages/user/user",
     "pages/wish/wish",
     "pages/demo/demo",
-    "pages/home/home",
     "pages/wishsuccess/wishsuccess",
     "pages/wallet/wallet",
     "pages/mywish/mywish",
