@@ -1,32 +1,34 @@
 <!--pages/mywish/mywish.wxml-->
-<view class='tab'>
+<view class='tab tab-fixed'>
   <view wx:for="{{tabs}}" wx:key="index" class='tab-item{{tabIndex===index?" active":""}}' bindtap='changeTabIndex' data-index='{{index}}'>{{item.text}}</view>
 </view>
-<view class='card-wish' wx:for="{{list}}" wx:key="index" bindtap='goDetailPage'>
+<view class='card-wish' wx:for="{{tabs[tabIndex].data}}" wx:key="index" bindtap='goDetailPage'>
   <view class='card-wish-header'>
     <view class='card-wish-btn card-wish-btn-primary' wx:if="{{tabIndex===0}}">提醒时间</view>
     <view class='card-wish-btn card-wish-btn-info' wx:if="{{tabIndex===1}}">许愿时间</view>
     <view class='card-wish-time'>{{item.remindTime}}</view>
     <view class='card-wish-praise'>
-      <praise value="520"></praise>
+      <praise value="{{item.commentsCount}}"></praise>
     </view>
   </view>
   <view class='card-wish-body'>
     <view class='card-wish-title'>{{item.title}}</view>
     <view class='card-wish-content'>{{item.content}}</view>
     <view class='card-wish-img'>
-      <image src='/assets/img/wish/banner.png'></image>
+      <image src='{{item.imgUrl}}'></image>
     </view>
   </view>
 </view>
-<view class='loaded-all-tips'>
-  <view class='loaded-all-body'>
-    哎呀！全部都被你看光了
+<view class='null-container' wx:if="{{!tabs[tabIndex].loading&&tabs[tabIndex].data.length===0}}">
+  <view class='null-body'>
+    <image src='/assets/img/background/no_wish.png' style='width:206rpx;height:234rpx;'></image>
+    <view class='null-text'>oooops! 还没有愿望
+      <navigator url='/pages/wish/wish' open-type="switchTab">去许愿</navigator>
+    </view>
   </view>
 </view>
-<view class='null-container'>
-  <image src='/assets/img/background/no_wish.png' style='width:206rpx;height:234rpx;'></image>
-  <view class='null-text'>oooops! 还没有愿望
-    <navigator url='/pages/wish/wish' open-type="switchTab">去许愿</navigator>
+<view class='loaded-all-tips' wx:if="{{tabs[tabIndex].loadedAll}}">
+  <view class='loaded-all-body'>
+    哎呀！全部都被你看光了
   </view>
 </view>

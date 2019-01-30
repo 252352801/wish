@@ -68,6 +68,7 @@ App({
         }
       },
       fail: res => {
+        console.log(12)
        //session无效
         user.login(request)
       }  

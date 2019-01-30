@@ -1,10 +1,14 @@
 // pages/user/user.js
+const http = require('../../utils/http.js');
+const createUrl = http.createUrl
+const request = http.request 
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    balance:0,
     userInfo: {
 
     }
@@ -39,6 +43,20 @@ Page({
       fail: (res) => {
         console.log(res)
       }
+    })
+    request({
+      path: 'user/info',
+      method: 'POST',
+      success: (res)=> {
+        console.log(res)
+        if(res.ok){
+          this.setData({
+            balance: res.body.money
+          })
+        }
+      },
+      fail: function (res) { },
+      complete: function (res) { },
     })
   },
 

@@ -12,9 +12,9 @@
         </view>
       </view>
       <view class='user-wallet'>
-        <navigator url="/pages/wallet/wallet">
+        <navigator url="/pages/wallet/wallet?balance={{balance}}">
           <image src='/assets/img/user/icon_wallet.png'></image>
-          <text>¥100</text>
+          <text>¥{{balance}}</text>
         </navigator>
       </view>
     </view>

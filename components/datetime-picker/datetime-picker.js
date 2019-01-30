@@ -30,7 +30,6 @@ Component({
    */
   methods: {
     init(datetime) {
-      console.log(datetime)
       const args = [this.data.startYear, this.data.endYear]
       if (!this.data.dateTime&&datetime) {
         args.push(datetimeFormat(datetime, 'yyyy-MM-dd hh:mm:ss'))
@@ -78,7 +77,6 @@ Component({
     }
   },
   ready: function() {
-    console.log(this.data.value)
     this.init(this.data.value)
   }
 })

@@ -1,25 +1,32 @@
 <!--pages/friendswish/friendswish.wxml-->
-<view class='panel-wish' wx:for="{{list}}" wx:key="index" bindtap='goDetailPage'>
+<view class='panel-wish' wx:for="{{data}}" wx:key="index" bindtap='goDetailPage'>
   <view class='panel-wish-header'>
-    <view class='pull-left'>下次我请</view>
+    <view class='pull-left'>{{item.nickName}}</view>
     <view class='pull-right'>
-      <praise value="200"></praise>
+      <praise value="{{item.commentsCount}}"></praise>
     </view>
   </view>
   <view class='panel-wish-body'>
     <view class='panel-wish-avatar img-container'>
-      <image src='/assets/img/avatar/avatar2.png'></image>
+      <image src='{{item.avatar}}'></image>
     </view>
-    <view class='panel-wish-title'>我的2019愿望</view>
-    <view class='panel-wish-content'>我要脱单的啊的啊啊啊啊啊啊</view>
+    <view class='panel-wish-title'>{{item.title}}</view>
+    <view class='panel-wish-content'>{{item.content}}</view>
   </view>
-   <view class='panel-wish-footer'>
-    许愿日期：2019/04/01 00:00
-   </view>
+  <view class='panel-wish-footer'>
+    许愿日期：{{item.createTime}}
+  </view>
 </view>
-<view class='null-container'>
-  <image src='/assets/img/background/no_wish.png' style='width:206rpx;height:234rpx;'></image>
-  <view class='null-text'>天啊! 还没有好友许愿
-    <navigator>去邀请</navigator>
+<view class='null-container' wx:if="{{!loading&&data.length===0}}">
+  <view class='null-body'>
+    <image src='/assets/img/background/no_wish.png' style='width:206rpx;height:234rpx;'></image>
+    <view class='null-text'>天啊! 还没有好友许愿
+      <navigator>去邀请</navigator>
+    </view>
+  </view>
+</view>
+<view class='loaded-all-tips' wx:if="{{loadedAll}}">
+  <view class='loaded-all-body'>
+    哎呀！全部都被你看光了
   </view>
 </view>

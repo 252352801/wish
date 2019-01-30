@@ -2,6 +2,7 @@
 
 page {
   background-color: rgb(236, 237, 238);
+  padding-top: 70rpx;
 }
 
 .card-wish {
@@ -89,4 +90,8 @@ page {
 .card-wish-img image{
   width: 100%;
   height: 100%;
+}
+
+.null-container{
+  top:70rpx;
 }

@@ -1,15 +1,15 @@
 {
   "pages": [
+    "pages/user/user",
+    "pages/wishdetails/wishdetails",
+    "pages/friendswish/friendswish",
+    "pages/mywish/mywish",
+    "pages/wish/wish",
     "pages/home/home",
     "pages/generateshareimg/generateshareimg",
-    "pages/user/user",
-    "pages/wish/wish",
     "pages/demo/demo",
     "pages/wishsuccess/wishsuccess",
     "pages/wallet/wallet",
-    "pages/mywish/mywish",
-    "pages/friendswish/friendswish",
-    "pages/wishdetails/wishdetails",
     "pages/comments/comments",
     "pages/logs/logs"
   ],

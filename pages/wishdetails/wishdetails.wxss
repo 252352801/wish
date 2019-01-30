@@ -15,7 +15,7 @@ page {
   right: 0;
   top: 0;
   bottom: 0;
-  background-color: #ea5958;
+  background-color: #D7625D;
 }
 
 .wd-banner-body image {
@@ -31,6 +31,7 @@ page {
   margin: -83rpx auto 10rpx auto;
   position: relative;
   z-index: 1;
+  background-color: #f0f0f0;
 }
 
 .wd-avatar-body {

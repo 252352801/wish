@@ -1,4 +1,9 @@
 // pages/mywish/mywish.js
+const http = require('../../utils/http.js');
+const createUrl = http.createUrl
+const createImageUrl = http.createImageUrl
+const request = http.request
+const splitTileAndContent = require('../../utils/util.js').splitTileAndContent
 Page({
 
   /**
@@ -6,24 +11,24 @@ Page({
    */
   data: {
     tabs: [{
-      text: '待提醒愿望'
+      text: '待提醒愿望',
+      value: '0',
+      data: [],
+      page: 1,
+      loading: false,
+      loadingMore: false,
+      loadedAll: false
     }, {
-      text: '已提醒愿望'
+      text: '已提醒愿望',
+      value: '1',
+      data: [],
+      page: 1,
+      loading: false,
+      loadingMore: false,
+      loadedAll: false
     }],
-    tabIndex: 0,
-    list: [{
-      remindTime: '2019/04/01 12:00',
-      title: '我的2019愿望',
-      image: '',
-      content: '我要脱单脱单脱单脱单啊啊啊啊啊啊啊啊',
-      praise: 700
-    }, {
-      remindTime: '2019/04/01 12:00',
-      image: '',
-      title: '我的2019愿望',
-      content: '我要脱单脱单脱单脱单啊啊啊啊啊啊啊啊',
-      praise: 700
-    }]
+    pageSize: 5,
+    tabIndex: 0
   },
   /**
    * tab切换
@@ -34,8 +39,119 @@ Page({
     this.setData({
       tabIndex: +e.target.dataset.index
     })
+    const tab = this.data.tabs[this.data.tabIndex]
+    if (tab.data.length === 0) {
+      this.getData(this.data.tabIndex)
+    }
   },
-
+  formatData(originData) {
+    const formattedData = []
+    if (originData instanceof Array) {
+      originData.forEach(ele => {
+        if (ele && typeof ele === 'object') {
+          formattedData.push({
+            remindTime: ele.remind_time,
+            commentsCount: ele.bless_sum,
+            ...splitTileAndContent(ele.wish_desc),
+            imgUrl: createImageUrl(ele.wish_img)
+          })
+        }
+      })
+    }
+    return formattedData
+  },
+  query({
+    body,
+    success,
+    fail,
+    complete
+  }) {
+    request({
+      path: 'wish/list',
+      data: body,
+      method: 'POST',
+      success: (res) => {
+        if (res.ok && res.body.wish_list instanceof Array) {
+          success(res.body.wish_list)
+        }
+      },
+      fail: function(err) {
+        fail(err)
+      },
+      complete: function(res) {
+        complete(res)
+      },
+    })
+  },
+  getData(tabIndex = this.data.tabIndex) {
+    console.log(tabIndex)
+    const tabs = this.data.tabs
+    const tab = tabs[tabIndex]
+    const body = {
+      type_code: this.data.tabs[tabIndex].value,
+      page_num: 1 //this.data.tabs[tabIndex].page
+    }
+    tab.loading = true
+    wx.showLoading({
+      title: '加载中',
+    })
+    this.query({
+      body,
+      success: (data) => {
+        console.log(data)
+        tab.data = formatData(data)
+      },
+      fail: (res) => {},
+      complete: (res) => {
+        wx.hideLoading()
+        tab.loading = false
+      },
+    })
+    /*request({
+      path: 'wish/list',
+      data: body,
+      method: 'POST',
+      success: (res)=> {
+        console.log(res)
+        if(res.ok){
+          tab.data=res.body.wish_list
+        }
+      },
+      fail: function(res) {},
+      complete: function(res) {
+        wx.hideLoading()
+        tab.loading=false
+      },
+    })*/
+  },
+  refresh() {
+    this.getData()
+  },
+  loadMore() {
+    const tab = this.data.tabs[tabIndex]
+    if (tab.loading||tab.loadingMore){
+      return
+    }
+    const body = {
+      type_code: tab.value,
+      page_num: tab.page + 1
+    }
+    tab.loadingMore = true
+    this.query({
+      body,
+      success: (data) => {
+        tab.data = tab.data.concat(formatData(data))
+        tab.page++
+        if (tab.data.length&&data.length<this.data.pageSize){
+          tab.loadedAll=true
+        }
+      },
+      fail: (res) => {},
+      complete: (res) => {
+        tab.loadingMore = false
+      },
+    })
+  },
   /**
    * 前往详情页
    */
@@ -49,7 +165,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    this.getData()
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -83,14 +199,14 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
+    this.refresh()
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-
+    this.loadMore()
   },
 
   /**

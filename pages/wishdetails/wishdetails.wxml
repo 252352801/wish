@@ -1,25 +1,25 @@
 <!--pages/wishdetails/wishdetails.wxml-->
 <view class='wd-banner'>
   <view class='wd-banner-body'>
-    <image src='/assets/img/wish/banner.png'></image>
+    <image src='{{wish.image}}'></image>
   </view>
 </view>
 <view class='wd-avatar-wrapper'>
   <view class='wd-avatar-body'>
-    <image src='/assets/img/avatar/avatar2.png'></image>
+    <image src='{{wish.avatar}}'></image>
   </view>
 </view>
-<view class='wd-nickname text-center'>下次我请</view>
+<view class='wd-nickname text-center'>{{wish.nickName}}</view>
 <view class='wd-content text-center'>
   <image src='/assets/img/wishdetails/bg_l_t.png'></image>
   <image src='/assets/img/wishdetails/bg_r_t.png'></image>
   <image src='/assets/img/wishdetails/bg_r_b.png'></image>
   <image src='/assets/img/wishdetails/bg_l_b.png'></image>
   <view class='wd-content-body'>
-    <view class='wd-title'>我的2019愿望</view>
-    <view class='wd-time'>愿望提醒时间：2019-10-07 00:00:00</view>
-    <view class='wd-description'>我要脱单脱单脱单脱单脱单，不要再做狗了，不要了不要了不要了不要了不要了不要了不要了不要了不要了不要了不要了不要了不要了不要了不要了</view>
-    <view class='wd-btn-collapse'>展开</view>
+    <view class='wd-title'>{{wish.title}}</view>
+    <view class='wd-time' wx:if='{{wish.remindTime}}'>愿望提醒时间：{{wish.remindTime}}</view>
+    <view class='wd-description'>{{wish.content}}</view>
+    <view class='wd-btn-collapse' wx:if='{{wish.content}}'>展开</view>
   </view>
 </view>
 <view class='wd-benediction-title text-center'>
@@ -28,33 +28,28 @@
   <image src='/assets/img/wishdetails/leaf_r.png'></image>
 </view>
 <view class='wd-benediction-value text-center'>已有
-  <text>2</text> 个好友祝福 收到
-  <text>2</text> 个红包
+  <text>{{wish.commentCount}}</text> 个好友祝福 收到
+  <text>{{wish.couponCount}}</text> 个红包
 </view>
-<view class="wd-benediction-item">
+<view class="wd-benediction-item" wx:for="{{wish.commentList}}" wx:key="index">
   <view class='wd-benediction-avatar'>
-    <image src='/assets/img/avatar/avatar2.png'></image>
+    <image src='{{item.avatar}}'></image>
   </view>
   <view class='wd-benediction-item-body'>
-    <view class='wd-benediction-nickname'>匿名</view>
-    <view class='wd-benediction-content'>祝你如愿哦</view>
+    <view class='wd-benediction-nickname'>{{item.nickName}}</view>
+    <view class='wd-benediction-content'>{{item.cmment}}</view>
   </view>
-  <image class='wd-benediction-coupon' src='/assets/img/wishdetails/coupon.png'></image>
+  <image class='wd-benediction-coupon' 
+  wx:if="{{item.coupon+''==='1'}}"
+  src='/assets/img/wishdetails/coupon.png'></image>
 </view>
-<view class="wd-benediction-item">
-  <view class='wd-benediction-avatar'>
-    <image src='/assets/img/avatar/avatar2.png'></image>
-  </view>
-  <view class='wd-benediction-item-body'>
-    <view class='wd-benediction-nickname'>匿名</view>
-    <view class='wd-benediction-content'>祝你如愿哦</view>
-  </view>
-</view>
-<view class='null-container'>
-  <image src='/assets/img/background/no_bene.png' style='width:156rpx;height:134rpx;'></image>
-  <view class='null-text'>
-    <view>还未有好友祝福，</view>
-    <view>快邀请好友们一起参加吧</view>
+<view class='null-container' style='position:relative'  wx:if="{{wish.commentList.length===0}}">
+  <view class='null-body'>
+    <image src='/assets/img/background/no_bene.png' style='width:156rpx;height:134rpx;'></image>
+    <view class='null-text'>
+      <view>还未有好友祝福，</view>
+      <view>快邀请好友们一起参加吧</view>
+    </view>
   </view>
 </view>
 <view class='wd-btn-bar' wx:if="{{origin==='mine'}}">

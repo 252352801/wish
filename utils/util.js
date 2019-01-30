@@ -251,15 +251,35 @@ const datetimeFormat = (datetime, format) => {
       if (new RegExp('(' + k + ')').test(fmt)) {
         fmt = fmt.replace(
           RegExp.$1,
-          RegExp.$1.length === 1
-            ? o[k]
-            : ('00' + o[k]).substr(('' + o[k]).length)
+          RegExp.$1.length === 1 ?
+          o[k] :
+          ('00' + o[k]).substr(('' + o[k]).length)
         )
       }
     }
     return fmt
   } else {
     return value
+  }
+}
+
+/**
+ * 分离标题和内容
+ */
+function splitTileAndContent(str) {
+  const title_content = str
+  let title = ''
+  let content = ''
+  if (typeof title_content === 'string') {
+    const splitStr = title_content.split('#')
+    if (splitStr.length > 1) {
+      title = splitStr[0]
+      content = splitStr[1]
+    }
+  }
+  return {
+    title,
+    content
   }
 }
 
@@ -272,6 +292,7 @@ module.exports = {
   hideBankCardNo: hideBankCardNo, //隐藏部分银行卡号
   hideCompanyName: hideCompanyName, //隐藏部分公司名
   datetimeFormat: datetimeFormat,
+  splitTileAndContent: splitTileAndContent,
   add: add, //加
   mul: mul, //乘
   div: div, //除

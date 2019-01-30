@@ -21,13 +21,42 @@ const host = {
  * @param <string> path 路径
  */
 function createUrl(path) {
-  if (env.prod) {
-    return host.prod + path;
-  } else if (env.test) {
-    return host.test + path;
-  } else if (env.dev) {
-    return host.dev + path;
+  let h = env.prod ? host.prod : env.test ? host.test : host.dev
+  return h + path.replace(/^\//,'')
+}
+
+/**
+ * 根据当前环境拼接图片url
+ * @param <string> path 路径
+ */
+function createImageUrl(path) {
+  let h = env.prod ? host.prod : env.test ? host.test : host.dev
+  return h + (typeof path==='string'?path.replace(/^\//, ''):'')
+}
+
+/**
+ * 格式化返回数据
+ * @param <*> data 服务器返回的数据
+ */
+function formatResponse(data){
+  const formatData = {
+    ok: false,
+    msg: '',
+    code:'',
+    body: {}
   }
+  if (data&&typeof data==='object'){
+    formatData.ok = (data.resultcode + '' === '000000')
+    formatData.msg = data.resultdesc
+    formatData.code = data.resultcode
+    const ingores = ['resultcode', 'resultdesc']
+    for (const k in data) {
+      if (ingores.indexOf(k) < 0) {
+        formatData.body[k] = data[k]
+      }
+    }
+  }
+  return formatData
 }
 
 /**
@@ -53,36 +82,24 @@ function request(options) {
   if (!(options.header && typeof options.header === 'object')) {
     options.header = {};
   }
+  options.data=Object.assign(options.data||{},{
+    token: wx.getStorageSync('token') || ''
+  })
   //options.header['Content-Type'] = 'application/x-www-form-urlencoded';//Content-Type
   options.header.token = wx.getStorageSync('token') || ''; //token头
   let orgSuccessCB = options.success; //初始的成功回调
   let filterSuccessCB = function(res) { //带过滤的回调函数
-    const formatData = {
-      ok: false,
-      msg: '',
-      body: {}
-    }
-    const data = res.data
-    if (data && typeof data === 'object') {
-      if (data.resultcode + '' === '888888') {
-        //登录超时
-        user.onLogin(() => {
-          request(options)
-        })
-        if (!user.isLogining) {
-          user.login(request)
-        }
-      } else {
-        formatData.ok = (data.resultcode + '' === '000000')
-        formatData.msg = data.resultdesc
-        const ingores = ['resultcode', 'resultdesc']
-        for (const k in data) {
-          if (ingores.indexOf(k) < 0) {
-            formatData.body[k] = data[k]
-          }
-        }
-        orgSuccessCB.call(options, formatData);
+    const data = formatResponse(res.data)
+    if (data.code + '' === '700000') {
+      //登录超时
+      user.onLogin(() => {
+        request(options)
+      })
+      if (!user.isLogining) {
+        user.login(request)
       }
+    } else {
+      orgSuccessCB.call(options, data);
     }
   };
   options.success = filterSuccessCB;
@@ -93,6 +110,8 @@ function request(options) {
 
 
 module.exports = {
-  createUrl: createUrl, //根据当前环境拼接url
+  formatResponse: formatResponse,
+  createUrl: createUrl, 
+  createImageUrl: createImageUrl,
   request: request //请求
 };

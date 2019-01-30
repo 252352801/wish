@@ -12,11 +12,13 @@
     </picker>
   </view>
   <view class="form">
-    <view class="form-item">
+    <view class="form-item required">
       <view class='form-item-body'>
-        <label>我的愿望</label>
+        <label>我的愿望
+          <text class='text-danger'>*</text>
+        </label>
         <view class="form-item-content">
-          <textarea auto-height bindinput='setInputValue' data-key='content'/>
+          <textarea auto-height bindinput='setInputValue' data-key='content' />
           <text class='form-placeholder' wx:if="{{!content}}">填写愿望内容</text>
         </view>
       </view>
@@ -25,7 +27,7 @@
       <view class='form-item-body'>
         <label>愿望提醒时间</label>
         <view class="form-item-content">
-            <datetime-picker bind:change="setRemindDatetime" value="{{remindDatetime}}"></datetime-picker>
+          <datetime-picker bind:change="setRemindDatetime" value="{{remindDatetime}}"></datetime-picker>
         </view>
       </view>
     </view>
@@ -33,7 +35,7 @@
       <view class='form-item-body' style='padding-top:12px;'>
         <label>贴在愿望墙</label>
         <view class="form-item-content text-right">
-          <switch checked bindchange="togglePase" />
+          <switch checked="{{public}}" bindchange="togglePublic" />
         </view>
       </view>
       <view class='form-item-tips'>其他用户可以在愿望墙上看到你的愿望</view>
@@ -42,7 +44,7 @@
       <view class='form-item-body' style='padding-top:12px;'>
         <label>支持红包祝福</label>
         <view class="form-item-content text-right">
-          <switch checked bindchange="toggleCoupon" />
+          <switch checked="{{coupon}}" bindchange="toggleCoupon" />
         </view>
       </view>
       <view class='form-item-tips'>1.允许发红包的方式祝福，仅限安卓用户</view>
@@ -55,4 +57,4 @@
 
   </view>
 </view>
- <cropper bind:success="setWishBanner" id="cropper"  clipWidth="{{750}}" clipHeight="{{355}}"></cropper>
+<cropper bind:success="uploadImg" id="cropper" clipWidth="{{750}}" clipHeight="{{355}}"></cropper>

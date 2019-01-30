@@ -6,6 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    commentRanklist:[],
+    couponRnkList:[],
     list: [{
       avatar: '/assets/img/avatar/avatar2.png',
       nickname: '下次我请',

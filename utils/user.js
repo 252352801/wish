@@ -18,6 +18,10 @@ class User{
             },
             method: 'POST',
             success: (res) => {
+              console.log(res)
+              if(res.ok){
+                wx.setStorageSync('token', res.body.token)
+              }
               while (this.loginHandlers.length) {
                 const fn = this.loginHandlers.shift()
                 if (typeof fn === 'function') {
