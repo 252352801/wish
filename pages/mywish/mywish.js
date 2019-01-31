@@ -3,7 +3,7 @@ const http = require('../../utils/http.js');
 const createUrl = http.createUrl
 const createImageUrl = http.createImageUrl
 const request = http.request
-const splitTileAndContent = require('../../utils/util.js').splitTileAndContent
+const splitTitleAndContent = require('../../utils/util.js').splitTitleAndContent
 Page({
 
   /**
@@ -12,7 +12,7 @@ Page({
   data: {
     tabs: [{
       text: '待提醒愿望',
-      value: '0',
+      value: '1',
       data: [],
       page: 1,
       loading: false,
@@ -20,7 +20,7 @@ Page({
       loadedAll: false
     }, {
       text: '已提醒愿望',
-      value: '1',
+      value: '2',
       data: [],
       page: 1,
       loading: false,
@@ -52,7 +52,7 @@ Page({
           formattedData.push({
             remindTime: ele.remind_time,
             commentsCount: ele.bless_sum,
-            ...splitTileAndContent(ele.wish_desc),
+            ...splitTitleAndContent(ele.wish_desc),
             imgUrl: createImageUrl(ele.wish_img)
           })
         }
@@ -72,7 +72,7 @@ Page({
       method: 'POST',
       success: (res) => {
         if (res.ok && res.body.wish_list instanceof Array) {
-          success(res.body.wish_list)
+          success(this.formatData(res.body.wish_list))
         }
       },
       fail: function(err) {
@@ -99,7 +99,7 @@ Page({
       body,
       success: (data) => {
         console.log(data)
-        tab.data = formatData(data)
+        tab.data = data
       },
       fail: (res) => {},
       complete: (res) => {
@@ -107,24 +107,14 @@ Page({
         tab.loading = false
       },
     })
-    /*request({
-      path: 'wish/list',
-      data: body,
-      method: 'POST',
-      success: (res)=> {
-        console.log(res)
-        if(res.ok){
-          tab.data=res.body.wish_list
-        }
-      },
-      fail: function(res) {},
-      complete: function(res) {
-        wx.hideLoading()
-        tab.loading=false
-      },
-    })*/
   },
   refresh() {
+    const tabs=this.data.tabs
+    const tab = tabs[this.data.tabIndex]
+    tab.loadedAll=false
+    this.setData({
+      tabs: tabs
+    })
     this.getData()
   },
   loadMore() {
@@ -140,7 +130,7 @@ Page({
     this.query({
       body,
       success: (data) => {
-        tab.data = tab.data.concat(formatData(data))
+        tab.data = tab.data.concat(data)
         tab.page++
         if (tab.data.length&&data.length<this.data.pageSize){
           tab.loadedAll=true
@@ -165,7 +155,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.getData()
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -178,7 +167,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    this.getData()
   },
 
   /**

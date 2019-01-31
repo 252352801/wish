@@ -1,0 +1,16 @@
+/* pages/comment/comment.wxss */
+page{
+  padding-bottom: 92rpx;
+}
+.panel-wish {
+  border-bottom: none;
+}
+.comment-btn-bar{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right:0;
+}
+.comment-btn-bar button{
+  border-radius: 0;
+}

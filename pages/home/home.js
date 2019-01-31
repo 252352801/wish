@@ -1,46 +1,13 @@
 // pages/home/home.js
-var http = require('../../utils/http.js');
-var request = http.request;
+const http = require('../../utils/http.js');
+const createImageUrl = http.createImageUrl
+const request = http.request
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    commentRanklist:[],
-    couponRnkList:[],
-    list: [{
-      avatar: '/assets/img/avatar/avatar2.png',
-      nickname: '下次我请',
-      moments: 1000
-    }, {
-      avatar: '/assets/img/avatar/avatar2.png',
-      nickname: '下次我请',
-      moments: 1000
-    }, {
-      avatar: '/assets/img/avatar/avatar2.png',
-      nickname: '下次我请',
-      moments: 1000
-    }, {
-      avatar: '/assets/img/avatar/avatar2.png',
-      nickname: '下次我请',
-      moments: 1000
-    }, {
-      avatar: '/assets/img/avatar/avatar2.png',
-      nickname: '下次我请',
-      moments: 1000
-    }, {
-      avatar: '/assets/img/avatar/avatar2.png',
-      nickname: '下次我请',
-      moments: 1000
-    }, {
-      avatar: '/assets/img/background/home_banner.png',
-      nickname: '下次我请',
-      moments: 1000
-    }, {
-      avatar: '/assets/img/avatar/avatar2.png',
-      nickname: '下次我请',
-      moments: 1000
-    }],
+    tops:[],
     tabs: ['获得祝福', '获得红包'],
     tabIndex: 0,
   },
@@ -48,6 +15,47 @@ Page({
     console.log(e)
     this.setData({
       tabIndex: +e.target.dataset.tab
+    })
+    this.getTopData()
+  },
+  formatData(data){
+    const fdata=[]
+    if(data instanceof Array){
+      data.forEach(ele=>{
+        fdata.push({
+          avatar: createImageUrl(ele.avatar_url),
+          nickName: ele.nick_name,
+          commentCount: +ele.bless_sum,
+          coupon: +ele.hb_sum
+        })
+      })
+    }
+    return fdata
+  },
+  getTopData(){
+    wx.showLoading({
+      title: '加载中'
+    })
+    const tanIndex = this.data.tabIndex
+    request({
+      path: 'user/toplist',
+      data: {
+        type: tanIndex + ''
+      },
+      method: 'POST',
+      success: (res) => {
+        if (res.ok) {
+          this.tops[tanIndex] = this.formatData(res.body.user_list)
+          this.setData({
+            tops: this.tops
+          })
+        }else{
+
+        }
+      },
+      complete: (res)=> {
+        wx.hideLoading()
+      },
     })
   },
   /**
@@ -66,7 +74,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    this.getTopData()
   },
 
   /**

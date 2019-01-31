@@ -8,7 +8,7 @@
   <view class='home-tab'>
     <view wx:for="{{tabs}}" wx:key="index" class='home-tab-item{{tabIndex===index?" active":""}}' hover-class='hover' bindtap='changeTab' data-tab='{{index}}'>{{item}}</view>
   </view>
-  <view class='home-list' wx:for="{{list}}" wx:key="index">
+  <view class='home-list' wx:for="{{tops[tabIndex]}}" wx:key="index">
     <view class='home-list-index'>{{index>2?index+1:''}}
       <image src='/assets/img/icon/icon_rank1.png' wx:if="{{index===0}}"></image>
       <image src='/assets/img/icon/icon_rank2.png' wx:if="{{index===1}}"></image>
@@ -17,15 +17,15 @@
     <view class='home-list-avatar'>
       <image src="{{item.avatar}}"></image>
     </view>
-    <view class='home-list-nickname'>{{item.nickname}}</view>
+    <view class='home-list-nickname'>{{item.nickName}}</view>
     <view class='home-list-receive' wx:if="{{tabIndex===0}}">
-      <praise value="999"></praise>
+      <praise value="{{item.commentCount}}"></praise>
     </view>
     <view wx:if="{{tabIndex===1}}">
       <view class='comm-icon-coupon'>
         <image src='/assets/img/icon/icon_coupon.png'></image>
       </view>
-      <text class='comm-rmb'>¥100</text>
+      <text class='comm-rmb'>¥{{item.coupon}}</text>
     </view>
   </view>
 </view>

@@ -3,14 +3,14 @@ const http = require('../../utils/http.js');
 const createUrl = http.createUrl
 const createImageUrl = http.createImageUrl
 const request = http.request
-const splitTileAndContent = require('../../utils/util.js').splitTileAndContent
+const splitTitleAndContent = require('../../utils/util.js').splitTitleAndContent
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    data: [],
+    data: [{}],
     page: 1,
     pageSize: 5,
     loading: false,
@@ -36,7 +36,7 @@ Page({
             avatar: ele.fri_avatar,
             nickName: ele.fri_nick_name,
             commentsCount: ele.bless_sum,
-            ...splitTileAndContent(ele.fri_wish_desc),
+            ...splitTitleAndContent(ele.fri_wish_desc),
             createTime: ele.create_time
           })
         }
@@ -56,7 +56,7 @@ Page({
       method: 'POST',
       success: (res) => {
         if (res.ok && res.body.wish_list instanceof Array) {
-          success(res.body.fri_wish_list)
+          success(this.formatData(res.body.fri_wish_list))
         }
       },
       fail: function(err) {
@@ -82,7 +82,7 @@ Page({
       success: (data) => {
         console.log(data)
         this.setData({
-          data: formatData(data)
+          data:data
         })
       },
       fail: (res) => {},
@@ -95,6 +95,9 @@ Page({
     })
   },
   refresh() {
+    this.setData({
+      loadedAll: false
+    })
     this.getData()
   },
   loadMore() {
@@ -110,7 +113,7 @@ Page({
     this.query({
       body,
       success: (data) => {
-        const newData = this.data.concat(formatData(data))
+        const newData = this.data.concat(data)
         const newPage = this.data.page + 1
         let loadedAll=false
         if (this.data.length && data.length < this.data.pageSize) {
@@ -149,7 +152,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    this.getData()
   },
 
   /**

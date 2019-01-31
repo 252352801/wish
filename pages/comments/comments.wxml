@@ -1,22 +1,41 @@
 <!--pages/comments/comments.wxml-->
-<view class='comm-item' wx:for="{{list}}" wx:key="index">
+<view class='comm-item' wx:for="{{data}}" wx:key="index">
   <view class='comm-header'>
     <view>
-      <view class='comm-nickname'>天线宝宝</view>
-      <view class='comm-time'>2019-01-01 12:12</view>
+      <view class='comm-nickname'>{{item.nickName}}</view>
+      <view class='comm-time'>{{item.createTime}}</view>
     </view>
-    <view>
+    <view wx:if="{{item.coupon}}">
       <view class='comm-icon-coupon'>
-        <image  src='/assets/img/icon/icon_coupon.png'></image>
+        <image src='/assets/img/icon/icon_coupon.png'></image>
       </view>
-      <text class='comm-rmb'>¥100</text>
+      <text class='comm-rmb'>¥{{item.coupon}}</text>
     </view>
   </view>
   <view class='comm-body'>
-    你一定会成功的！新年快乐！
+    {{item.comment}}
   </view>
-  <view class='comm-wish-info'>
-    你的愿望：挑战瑜伽减肥法
+  <view class='comm-wish-info' wx:if="{{item.title}}">
+    你的愿望：#{{item.title}}#{{item.content}}
   </view>
-  <view class='comm-avatar img-container'></view>
+  <view class='comm-avatar img-container'>
+    <image src='{{item.avatar}}'></image>
+  </view>
+</view>
+
+<view class='null-container' wx:if="{{!loading&&data.length===0}}">
+  <view class='null-body'>
+    <image src='/assets/img/background/no_bene.png' style='width:156rpx;height:134rpx;'></image>
+    <view class='null-text'>
+      <view>还未有好友祝福</view>
+      <view>快
+        <text class='text-primary text-underline pad-r-xs pad-l-xs' hover-class='hover'>邀请好友</text>们一起参加吧
+      </view>
+    </view>
+  </view>
+</view>
+<view class='loaded-all-tips' wx:if="{{loadedAll}}">
+  <view class='loaded-all-body'>
+    暂时就这么多了
+  </view>
 </view>

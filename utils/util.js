@@ -264,9 +264,16 @@ const datetimeFormat = (datetime, format) => {
 }
 
 /**
+ * 组合挑剔和内容
+ */
+function combineTitleAndContent(title,content){
+  return title + '#' + content
+}
+
+/**
  * 分离标题和内容
  */
-function splitTileAndContent(str) {
+function splitTitleAndContent(str) {
   const title_content = str
   let title = ''
   let content = ''
@@ -292,7 +299,8 @@ module.exports = {
   hideBankCardNo: hideBankCardNo, //隐藏部分银行卡号
   hideCompanyName: hideCompanyName, //隐藏部分公司名
   datetimeFormat: datetimeFormat,
-  splitTileAndContent: splitTileAndContent,
+  combineTitleAndContent: combineTitleAndContent,
+  splitTitleAndContent: splitTitleAndContent,
   add: add, //加
   mul: mul, //乘
   div: div, //除

@@ -43,7 +43,7 @@
   wx:if="{{item.coupon+''==='1'}}"
   src='/assets/img/wishdetails/coupon.png'></image>
 </view>
-<view class='null-container' style='position:relative'  wx:if="{{wish.commentList.length===0}}">
+<view class='null-container' style='position:relative'  wx:if="{{!loading&&wish.commentList.length===0}}">
   <view class='null-body'>
     <image src='/assets/img/background/no_bene.png' style='width:156rpx;height:134rpx;'></image>
     <view class='null-text'>

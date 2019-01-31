@@ -1,7 +1,9 @@
 /* pages/wish/wish.wxss */
+
 page {
-  background-color: rgb(236,237,238);
-} 
+  background-color: rgb(236, 237, 238);
+}
+
 .wish-banner {
   padding-top: 47.33%;
   position: relative;
@@ -13,16 +15,16 @@ page {
   right: 0;
   top: 0;
   bottom: 0;
-  background-color: #D7625D;
+  background-color: #d7625d;
 }
 
-.wish-banner-body image {
+.wish-banner-body .image-banner {
   width: 100%;
   height: 100%;
 }
 
 .wish-title-select {
-  padding: 18px 12px;
+  padding: 36rpx 24rpx;
   text-align: center;
 }
 
@@ -37,63 +39,37 @@ page {
   display: inline-block;
   width: 0;
   height: 0;
-  border: 6px solid transparent;
+  border: 12rpx solid transparent;
   border-top-color: rgb(102, 102, 102);
-  border-left-width: 5px;
-  border-right-width: 5px;
+  border-left-width: 10rpx;
+  border-right-width: 10r5px;
   vertical-align: middle;
-  margin-left: 6px;
+  margin-left: 12rpx;
   position: relative;
-  top:3px;
+  top: 6rpx;
 }
-
-.form-item{
-  background-color: #fff;
-  border-bottom:1px solid #dcdcdc;
-  padding:0 12px;
-}
-.form-item-body{
-  display: flex;
-  min-height: 72rpx;
-  align-items: center;
-}
-.form-item:nth-child(1){
-  border-top:1px solid #dcdcdc;
-}
-.form-item label,.form-item-content{
-  font-size: 26rpx;
-  vertical-align: middle;
-  flex-grow: 1;
-}
-.form-item label{
-  width: 6em;
-  padding-right: 1em;
-}
-.form-item-content{
-  width: calc(100% - 7em);
-  position: relative;
-}
-.form-item-content input{
-  width: 100%;
-  font-size: 13px;
-}
-.form-item-tips{
-  display: block;
-  width: 100%;
-  font-size: 12px;
-  color:rgb(153,153,153);
-  flex-grow: 4;
-}
-.form-item-tips:last-child{
-  padding-bottom: 24rpx;
-}
-.wish-btn-bar{
+.wish-btn-bar {
   margin: 36rpx;
 }
-.form-placeholder{
-  color:rgb(153, 153, 153);
-  font-size: 26rpx;
+.wish-btn-pickimg{
+  width: 52rpx;
+  height:48rpx;
   position: absolute;
-  left: 0;
+  right: 20rpx;
+  bottom: 20rpx;
+}
+.wish-btn-clear{
+  position: absolute;
+  right: 10rpx;
   top:0;
+  width: 30rpx;
+  height:30rpx;
+  background-color: #ddd;
+  border-radius: 50%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  color:#fff;
 }

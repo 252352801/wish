@@ -3,7 +3,7 @@ const http = require('../../utils/http.js');
 const createUrl = http.createUrl
 const createImageUrl = http.createImageUrl
 const request = http.request
-const splitTileAndContent = require('../../utils/util.js').splitTileAndContent
+const splitTitleAndContent = require('../../utils/util.js').splitTitleAndContent
 Page({
 
   /**
@@ -33,11 +33,15 @@ Page({
         image: createImageUrl(data.wish_img),
         avatar: '',
         nickName: '',
-        ...splitTileAndContent(data.wish_desc),
+        ...splitTitleAndContent(data.wish_desc),
         remindTime: '',
       })
       if (data.fri_infos instanceof Array){
         data.fri_infos.forEach(ele=>{
+          fdata.commentCount++
+          if (+ele.donate_flag){
+            fdata.couponCount++
+          }
           fdata.commentList.push({
             avatar: ele.fri_avatar,
             nickName: ele.fri_nick_name,
@@ -64,6 +68,9 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
+    this.setData({
+      loading:true
+    })
     request({
       path: 'wish/select',
       data: body,
@@ -77,8 +84,11 @@ Page({
       },
       fail: function (err) {
       },
-      complete: function (res) {
+      complete: (res)=> {
         wx.hideLoading()
+        this.setData({
+          loading: false
+        })
       },
     })
   },
@@ -89,15 +99,16 @@ Page({
     this.setData({
       wish: this.formatData({})
     })
-    let origin='mine'
+    let origin = 'mine'
+    let scene = options.scene || ''
+    let id = options.id || ''
     if (options.origin!==undefined){
       origin = options.origin
     }
-    if (options.scene){
-
-    }
     this.setData({
-      origin
+      origin,
+      scene,
+      id
     })
     this.getDetail()
   },

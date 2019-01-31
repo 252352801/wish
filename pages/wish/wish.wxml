@@ -2,7 +2,8 @@
 <view class='page-wish'>
   <view class='wish-banner' bindtap='pickBannerImg'>
     <view class='wish-banner-body'>
-      <image src="{{bannerUrl}}"></image>
+      <image class='image-banner' src="{{bannerUrl}}"></image>
+      <image class='wish-btn-pickimg' src="/assets/img/icon/icon_camera.png"></image>
     </view>
   </view>
   <view class='wish-title-select'>
@@ -18,32 +19,33 @@
           <text class='text-danger'>*</text>
         </label>
         <view class="form-item-content">
-          <textarea auto-height bindinput='setInputValue' data-key='content' />
           <text class='form-placeholder' wx:if="{{!content}}">填写愿望内容</text>
+          <textarea style="padding:20rpx 0" auto-height bindinput='setInputValue' data-key='content' />
         </view>
       </view>
     </view>
     <view class="form-item mar-b">
       <view class='form-item-body'>
         <label>愿望提醒时间</label>
-        <view class="form-item-content">
+        <view class="form-item-content" style='padding-right:60rpx'>
           <datetime-picker bind:change="setRemindDatetime" value="{{remindDatetime}}"></datetime-picker>
+          <view class='wish-btn-clear' wx:if="{{remindDatetime}}" bindtap='clearRemindDatetime'>×</view>
         </view>
       </view>
     </view>
     <view class="form-item">
-      <view class='form-item-body' style='padding-top:12px;'>
+      <view class='form-item-body'>
         <label>贴在愿望墙</label>
-        <view class="form-item-content text-right">
+        <view class="form-item-content text-right" style='padding-top:24rpx;'>
           <switch checked="{{public}}" bindchange="togglePublic" />
         </view>
       </view>
       <view class='form-item-tips'>其他用户可以在愿望墙上看到你的愿望</view>
     </view>
     <view class="form-item">
-      <view class='form-item-body' style='padding-top:12px;'>
+      <view class='form-item-body'>
         <label>支持红包祝福</label>
-        <view class="form-item-content text-right">
+        <view class="form-item-content text-right" style='padding-top:24rpx;'>
           <switch checked="{{coupon}}" bindchange="toggleCoupon" />
         </view>
       </view>

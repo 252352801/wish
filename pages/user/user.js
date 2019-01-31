@@ -2,6 +2,7 @@
 const http = require('../../utils/http.js');
 const createUrl = http.createUrl
 const request = http.request 
+var app=getApp()
 Page({
 
   /**
@@ -20,8 +21,8 @@ Page({
     })
   },
   userInfoHandler(res){
-    console.log(res)
     if (res.detail.userInfo){
+      app.shouldUpdateUserInfo()
       this.setData({
         userInfo: res.detail.userInfo
       })

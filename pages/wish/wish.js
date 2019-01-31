@@ -4,13 +4,16 @@ const createUrl = http.createUrl
 const createImageUrl = http.createImageUrl
 const request = http.request
 const formatResponse = http.formatResponse
+const combineTitleAndContent = require('../../utils/util.js').combineTitleAndContent
+const app = getApp(); //获取应用实例
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    bannerUrl: '/assets/img/wish/banner.png',
+    defautBanner: '/assets/img/wish/banner.png',
+    bannerUrl: '',
     bannerPath: '',
     titleOptions: ['我的2019愿望', '彩票中奖', '12点上班', '美梦成真', '脱单'],
     titleIndex: 0,
@@ -22,53 +25,78 @@ Page({
   userInfoHandler(res) {
     console.log(res)
     if (res.detail.userInfo) {
-      //已授权
-      if (!this.data.content) {
-        this.showErrMsg('请输入你的愿望内容', '就差一小步了')
-      } else {
-        const data = {
-          img_url: this.data.bannerUrl,
-          is_donate: this.data.coupon ? '1' : '0',
-          is_visible: this.data.public ? '1' : '0',
-          remind_time: this.data.remindDatetime,
-          wish_desc: this.data.titleOptions[this.data.titleIndex] + '#' + this.data.content
-        }
-        console.log(data)
-        wx.showLoading({
-          title: '正在许愿',
-          mask: true
+      app.shouldUpdateUserInfo(res.detail.userInfo.nickName, res.detail.userInfo.avatarUrl)
+        .then(() => {
+          this.submit()
+        }, () => {
+          this.submit()
         })
-        wx.request({
-          path: 'wish/insert',
-          data,
-          method: 'POST',
-          success: function(res) {
-            if (res.ok) {
-              wx.navigateTo({
-                url: `/pages/wishdetails/wishdetails?origin=mine&id=` + res.body.wish_id,
-              })
-            } else {
-              wx.showErrMsg('许愿失败', res.msg)
-            }
-          },
-          fail: function(res) {
-            wx.showErrMsg('请求失败', '请检查您的网络设置')
-          },
-          complete: function(res) {
-            wx.hideLoading()
-          },
-        })
-      }
     }
   },
-  showErrMsg(title, content) {
-    wx.showModal({
-      title: title,
-      showCancel: false,
-      confirmText: '好的',
-      content: content,
-      confirmColor: '#D7625D'
-    })
+  submit() {
+    //已授权
+    if (!this.data.content) {
+      app.showMsg({
+        title: '请输入你的愿望内容',
+        content: '就差一小步了'
+      })
+    } else {
+      const data = {
+        img_url: this.data.bannerPath,
+        is_donate: this.data.coupon ? '1' : '0',
+        is_visible: this.data.public ? '1' : '0',
+        wish_desc: combineTitleAndContent(this.data.titleOptions[this.data.titleIndex], this.data.content)
+      }
+      if (this.data.remindDatetime) {
+        data['remind_time'] = this.data.remindDatetime
+      }
+      console.log(data)
+      wx.showLoading({
+        title: '正在许愿',
+        mask: true
+      })
+      request({
+        path: 'wish/insert',
+        data,
+        method: 'POST',
+        success: (res) => {
+          if (res.ok) {
+            app.showMsg({
+                title: '许愿成功！',
+                content: '现在去看看吧',
+                confirmText: '查看详情',
+                cancelText: '继续许愿',
+                showCancel: true,
+              })
+              .then((confirm) => {
+                if (confirm) {
+                  wx.navigateTo({
+                    url: `/pages/wishdetails/wishdetails?origin=mine&id=` + res.body.wish_id,
+                  })
+                } else {
+                  this.setData({
+                    content: ''
+                  })
+                }
+              })
+          } else {
+            app.showMsg({
+              title: '许愿失败',
+              content: res.msg
+            })
+          }
+        },
+        fail: (res) => {
+          app.showMsg({
+            title: '请求失败',
+            content: '请稍后后重试'
+          })
+        },
+        complete: function(res) {
+          wx.hideLoading()
+        },
+      })
+    }
   },
   onTitlePickerChange(e) {
     this.setData({
@@ -85,6 +113,11 @@ Page({
       remindDatetime: e.detail.value
     })
   },
+  clearRemindDatetime() {
+    this.setData({
+      remindDatetime: ''
+    })
+  },
   togglePublic(e) {
     console.log(e)
     this.setData({
@@ -98,7 +131,21 @@ Page({
     })
   },
   pickBannerImg() {
-    this.selectComponent('#cropper').chooseImage()
+    // this.selectComponent('#cropper').chooseImage()
+    wx.showActionSheet({
+      itemList: ['使用默认图片', '上传自定义图片'],
+      success: (res) => {
+        console.log(res.tapIndex)
+        const tapIndex = res.tapIndex
+        if (tapIndex === 0) { //使用默认
+          this.setData({
+            bannerUrl: this.data.defautBanner
+          })
+        } else if (tapIndex === 1) { //上传自定义图片
+          this.selectComponent('#cropper').chooseImage()
+        }
+      }
+    })
   },
   uploadImg(e) {
     wx.showLoading({
@@ -125,7 +172,7 @@ Page({
             console.log(this.data.bannerUrl)
           }
         } catch (err) {
-
+          consloe.log(err)
         }
       },
       fail: (err) => {
@@ -170,7 +217,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    this.setData({
+      bannerUrl: this.data.defautBanner
+    })
   },
 
   /**

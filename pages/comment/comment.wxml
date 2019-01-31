@@ -1,0 +1,45 @@
+<!--pages/comment/comment.wxml-->
+<view class='panel-wish'>
+  <view class='panel-wish-header'>
+    <view class='pull-left'>{{wish.nickName}}</view>
+    <view class='pull-right'>
+      <praise value="{{wish.commentsCount}}"></praise>
+    </view>
+  </view>
+  <view class='panel-wish-body'>
+    <view class='panel-wish-avatar img-container'>
+      <image src='{{wish.avatar}}'></image>
+    </view>
+    <view class='panel-wish-title'>{{wish.title}}</view>
+    <view class='panel-wish-content'>{{wish.content}}</view>
+  </view>
+  <view class='panel-wish-footer' wx:if="{{wish.createTime}}">
+    许愿日期：{{wish.createTime}}
+  </view>
+</view>
+<view class="form">
+  <view class="form-item">
+    <view class='form-item-body'>
+      <label>祝福语
+        <text class='text-danger'>*</text>
+      </label>
+      <view class="form-item-content">
+        <textarea style="padding:20rpx 0;" auto-height bindinput='setInputValue' data-key='comment' />
+        <text value="{{comment}}" class='form-placeholder' wx:if="{{!comment}}">写下你的美好祝福吧</text>
+      </view>
+    </view>
+  </view>
+  <view class="form-item">
+    <view class='form-item-body'>
+      <label>发送红包
+      </label>
+      <view class="form-item-content">
+        <input type="number" value="{{coupon}}" bindinput='setInputValue' data-key='coupon' placeholder='红包金额'></input>
+      </view>
+    </view>
+  </view>
+  <view class='comment-btn-bar'>
+    <button type="primary" open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">发送祝福</button>
+  </view>
+
+</view>

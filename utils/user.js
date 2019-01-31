@@ -1,6 +1,20 @@
+let nickName=wx.getStorageSync('nickName')
+let avatar = wx.getStorageSync('avatar')
 class User{
-  nickName=''
-  avatar=''
+  get nickName(){
+    return nickName
+  }
+  get avatar(){
+    return avatar
+  }
+  set nickName(val){
+    nickName=val
+    wx.setStorageSync('nickName', val)
+  }
+  set avatar(val){
+    avatar = val
+    wx.setStorageSync('avatar', val)
+  }
   loginHandlers = []
   isLogining = false
   onLogin(fn) {

@@ -1,18 +1,134 @@
 // pages/comments/comments.js
+const http = require('../../utils/http.js');
+const createUrl = http.createUrl
+const createImageUrl = http.createImageUrl
+const request = http.request
+const splitTitleAndContent = require('../../utils/util.js').splitTitleAndContent
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    list: [{}, {}]
+    data:[],
+    page: 1,
+    pageSize: 5,
+    loading:false,
+    loadingMore:false,
+    loadedAll:false
+  },
+
+  formatData(originData) {
+    const formattedData = []
+    if (originData instanceof Array) {
+      originData.forEach(ele => {
+        if (ele && typeof ele === 'object') {
+          formattedData.push({
+            avatar: ele.fri_avatar,
+            nickName: ele.fri_nick_name,
+            comment: ele.fri_bless_desc,
+            coupon: ele.money,
+            ...splitTitleAndContent(ele.wish_desc),    
+            createTime: ele.create_time
+          })
+        }
+      })
+    }
+    return formattedData
+  },
+  query({
+    body,
+    success,
+    fail,
+    complete
+  }) {
+    request({
+      path: 'bless/list',
+      data: body,
+      method: 'POST',
+      success: (res) => {
+        if (res.ok && res.body.wish_list instanceof Array) {
+          success(this.formatData(res.body.bless_list))
+        }
+      },
+      fail: function (err) {
+        fail(err)
+      },
+      complete: function (res) {
+        complete(res)
+      },
+    })
+  },
+  getData() {
+    const body = {
+      page_num: 1
+    }
+    this.setData({
+      loading: true
+    })
+    wx.showLoading({
+      title: '加载中',
+    })
+    this.query({
+      body,
+      success: (data) => {
+        this.setData({
+          data: data
+        })
+      },
+      fail: (res) => { },
+      complete: (res) => {
+        wx.hideLoading()
+        this.setData({
+          loading: false
+        })
+      },
+    })
+  },
+  refresh() {
+    this.setData({
+      loadedAll: false
+    })
+    this.getData()
+  },
+  loadMore() {
+    if (this.data.loading || this.data.loadingMore) {
+      return
+    }
+    const body = {
+      page_num: this.data.page + 1
+    }
+    this.setData({
+      loadingMore: true
+    })
+    this.query({
+      body,
+      success: (data) => {
+        const newData = this.data.concat(data)
+        const newPage = this.data.page + 1
+        let loadedAll = false
+        if (this.data.length && data.length < this.data.pageSize) {
+          loadedAll = true
+        }
+        this.setData({
+          data: newData,
+          page: newPage,
+          loadedAll
+        })
+      },
+      fail: (res) => { },
+      complete: (res) => {
+        this.setData({
+          loadingMore: false
+        })
+      },
+    })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
   },
 
   /**
@@ -26,7 +142,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    this.getData()
   },
 
   /**
@@ -47,7 +163,9 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
+    this.setData({
+      loadedAll:false
+    })
   },
 
   /**

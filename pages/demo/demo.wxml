@@ -1,2 +1,0 @@
-<!--pages/demo/demo.wxml-->
-<datetime-picker value='{{datetime}}' bind:change="setDatetime"></datetime-picker>
