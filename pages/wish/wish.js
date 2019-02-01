@@ -20,7 +20,8 @@ Page({
     content: '',
     remindDatetime: '',
     public: true,
-    coupon: true
+    coupon: true,
+    pickingImage:false
   },
   userInfoHandler(res) {
     console.log(res)
@@ -28,8 +29,9 @@ Page({
       app.shouldUpdateUserInfo(res.detail.userInfo.nickName, res.detail.userInfo.avatarUrl)
         .then(() => {
           this.submit()
-        }, () => {
+        }, (err) => {
           this.submit()
+          console.log(err)
         })
     }
   },
@@ -97,6 +99,16 @@ Page({
         },
       })
     }
+  },
+  onPickImg(){
+    this.setData({
+      pickingImage:true
+    })
+  },
+  onPickImgComplete(){
+    this.setData({
+      pickingImage: false
+    })
   },
   onTitlePickerChange(e) {
     this.setData({
@@ -173,6 +185,10 @@ Page({
           }
         } catch (err) {
           consloe.log(err)
+          app.showMsg({
+            title:'图片上传失败！',
+            content:'请稍后重试'
+          })
         }
       },
       fail: (err) => {
@@ -193,6 +209,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    console.log(options)
+    console.log(options.shareCode)
     // setTimeout(()=>{
     //   request({
     //     path: 'user/info',

@@ -7,7 +7,7 @@
   <text class='wallet-balance'>¥{{balance}}</text>
 </view>
 <view class='wallet-btn-bar'>
-  <button class="wallet-btn" disabled='{{balance===0}}'>提现</button>
+  <button class="wallet-btn"  bindtap='cash'>提现</button>
 </view>
 <view class='wallet-tips'>
   申请提现后，在1到3个工作日内提现到你到微信

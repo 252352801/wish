@@ -35,11 +35,11 @@ class User{
               console.log(res)
               if(res.ok){
                 wx.setStorageSync('token', res.body.token)
-              }
-              while (this.loginHandlers.length) {
-                const fn = this.loginHandlers.shift()
-                if (typeof fn === 'function') {
-                  fn()
+                while (this.loginHandlers.length) {
+                  const fn = this.loginHandlers.shift()
+                  if (typeof fn === 'function') {
+                    fn()
+                  }
                 }
               }
             },

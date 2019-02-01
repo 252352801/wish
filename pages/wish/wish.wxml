@@ -20,7 +20,7 @@
         </label>
         <view class="form-item-content">
           <text class='form-placeholder' wx:if="{{!content}}">填写愿望内容</text>
-          <textarea style="padding:20rpx 0" auto-height bindinput='setInputValue' data-key='content' />
+          <textarea wx:if="{{!pickingImage}}" style="padding:20rpx 0" auto-height bindinput='setInputValue' data-key='content' />
         </view>
       </view>
     </view>

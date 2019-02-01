@@ -50,10 +50,12 @@ Page({
       originData.forEach(ele => {
         if (ele && typeof ele === 'object') {
           formattedData.push({
+            id: ele.wish_id,
+            type: ele.wish_type,
             remindTime: ele.remind_time,
             commentsCount: ele.bless_sum,
             ...splitTitleAndContent(ele.wish_desc),
-            imgUrl: createImageUrl(ele.wish_img)
+            imgUrl: createImageUrl(ele.image)
           })
         }
       })
@@ -92,6 +94,7 @@ Page({
       page_num: 1 //this.data.tabs[tabIndex].page
     }
     tab.loading = true
+    this.mutateTabs()
     wx.showLoading({
       title: '加载中',
     })
@@ -105,7 +108,13 @@ Page({
       complete: (res) => {
         wx.hideLoading()
         tab.loading = false
+        this.mutateTabs()
       },
+    })
+  },
+  mutateTabs(){
+    this.setData({
+      tabs:this.data.tabs
     })
   },
   refresh() {
@@ -118,7 +127,7 @@ Page({
     this.getData()
   },
   loadMore() {
-    const tab = this.data.tabs[tabIndex]
+    const tab = this.data.tabs[this.data.tabIndex]
     if (tab.loading||tab.loadingMore){
       return
     }
@@ -127,11 +136,14 @@ Page({
       page_num: tab.page + 1
     }
     tab.loadingMore = true
+    this.mutateTabs()
     this.query({
       body,
       success: (data) => {
         tab.data = tab.data.concat(data)
-        tab.page++
+        if(data.length){
+          tab.page++
+        }
         if (tab.data.length&&data.length<this.data.pageSize){
           tab.loadedAll=true
         }
@@ -139,15 +151,16 @@ Page({
       fail: (res) => {},
       complete: (res) => {
         tab.loadingMore = false
+        this.mutateTabs()
       },
     })
   },
   /**
    * 前往详情页
    */
-  goDetailPage() {
+  goDetailPage(e) {
     wx.navigateTo({
-      url: `/pages/wishdetails/wishdetails?origin=mine`,
+      url: `/pages/wishdetails/wishdetails?origin=mine&id=${e.currentTarget.dataset.id}`,
     })
   },
 

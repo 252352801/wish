@@ -1,6 +1,8 @@
 /* components/praise/praise.wxss */
 @import '/assets/iconfont/iconfont.wxss';
-
+page{
+  white-space: nowrap;
+}
 .praise-count {
   display: inline-block;
   vertical-align: middle;

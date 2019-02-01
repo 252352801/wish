@@ -2,7 +2,7 @@
 
 page {
   background-color: rgb(236, 237, 238);
-  padding-top: 70rpx;
+  padding-top: 80rpx;
 }
 
 .card-wish {
@@ -28,6 +28,8 @@ page {
   padding: 4rpx 30rpx;
   border-radius: 30rpx;
   line-height: 40rpx;
+  width:180rpx;
+  text-align:center;
 }
 .card-wish-btn:active{
   opacity: 0.75;
@@ -45,7 +47,6 @@ page {
   margin-left: 14rpx;
   font-size: 24rpx;
   color: rgb(51, 51, 51);
-  letter-spacing: 4rpx;
   flex-grow: 2;
 }
 

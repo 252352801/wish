@@ -10,12 +10,13 @@ Page({
    * 页面的初始数据
    */
   data: {
-    data: [{}],
+    data: [],
     page: 1,
     pageSize: 5,
     loading: false,
     loadingMore: false,
-    loadedAll: false
+    loadedAll: false,
+    shareCode:wx.getStorageSync('shareCode') //
   },
 
   /**
@@ -138,7 +139,29 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    //wx.hideShareMenu()
+    console.log(this.data.shareCode)
+    if(!this.data.shareCode){
+      wx.hideShareMenu()
+      //获取分享码
+      console.log('获取分享码...')
+      request({
+        path: 'sharecode',
+        method: 'POST',
+        success: (res) => {
+        },
+        complete: (res) => {
+          const shareCode='12345'
+          this.setData({
+            shareCode: shareCode
+          })
+          wx.setStorageSync('shareCode', shareCode)
+          wx.showShareMenu()
+        },
+      })
+    }else{
+      wx.showShareMenu()
+    }
   },
 
   /**
@@ -186,7 +209,12 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
-
+  onShareAppMessage: function(res) {
+    let data={
+      title: '许个愿望吧，保证实现',
+      path: '/pages/wish/wish?shareCode=' + this.data.shareCode,
+      imageUrl: '/assets/img/wish/banner.png'
+    }
+    return data
   }
 })

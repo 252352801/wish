@@ -1,14 +1,14 @@
 {
   "pages": [
+    "pages/home/home",
+    "pages/friendswish/friendswish",
+    "pages/generateshareimg/generateshareimg",
     "pages/wish/wish",
+    "pages/mywish/mywish",
     "pages/comment/comment",
     "pages/user/user",
-    "pages/friendswish/friendswish",
     "pages/comments/comments",
-    "pages/mywish/mywish",
     "pages/wishdetails/wishdetails",
-    "pages/home/home",
-    "pages/generateshareimg/generateshareimg",
     "pages/wallet/wallet",
     "pages/logs/logs"
   ],
@@ -16,7 +16,7 @@
     "backgroundColor": "#D7625D",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#D7625D",
-    "navigationBarTitleText": "",
+    "navigationBarTitleText": "我的小愿望",
     "navigationBarTextStyle": "#fff"
   },
   "tabBar": {

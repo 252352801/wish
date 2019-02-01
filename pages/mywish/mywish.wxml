@@ -2,11 +2,13 @@
 <view class='tab tab-fixed'>
   <view wx:for="{{tabs}}" wx:key="index" class='tab-item{{tabIndex===index?" active":""}}' bindtap='changeTabIndex' data-index='{{index}}'>{{item.text}}</view>
 </view>
-<view class='card-wish' wx:for="{{tabs[tabIndex].data}}" wx:key="index" bindtap='goDetailPage'>
+<view class='card-wish' wx:for="{{tabs[tabIndex].data}}" wx:key="index" bindtap='goDetailPage' data-id="{{item.id}}">
   <view class='card-wish-header'>
     <view class='card-wish-btn card-wish-btn-primary' wx:if="{{tabIndex===0}}">提醒时间</view>
     <view class='card-wish-btn card-wish-btn-info' wx:if="{{tabIndex===1}}">许愿时间</view>
-    <view class='card-wish-time'>{{item.remindTime}}</view>
+    <view class='card-wish-time'>
+      <datetime value="{{item.remindTime}}" format='yyyy-MM-dd hh:mm:ss'></datetime>
+    </view>
     <view class='card-wish-praise'>
       <praise value="{{item.commentsCount}}"></praise>
     </view>

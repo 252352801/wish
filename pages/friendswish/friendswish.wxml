@@ -20,8 +20,12 @@
 <view class='null-container' wx:if="{{!loading&&data.length===0}}">
   <view class='null-body'>
     <image src='/assets/img/background/no_wish.png' style='width:206rpx;height:234rpx;'></image>
-    <view class='null-text'>天啊! 还没有好友许愿
-      <navigator>去邀请</navigator>
+    <view class='null-text'>
+      <text>天啊! 还没有好友许愿</text>
+      <view class='null-btn-share' wx:if="{{shareCode}}">
+        去邀请
+        <button class='btn-share' open-type='share'></button>
+      </view>
     </view>
   </view>
 </view>

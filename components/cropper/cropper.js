@@ -60,6 +60,7 @@ Component({
    */
   methods: {
     chooseImage() {
+      this.triggerEvent("open")
       let _this = this
       wx.chooseImage({
         count: 1, // 默认9
@@ -119,6 +120,9 @@ Component({
               title: '生成图片失败',
               icon: 'none'
             })
+          },
+          complete:(res)=>{
+            this.triggerEvent("close")
           }
         }, this)
       });
